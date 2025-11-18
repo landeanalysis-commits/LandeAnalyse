@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="no" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lande Analyse | Dataanalyse & AI-løsninger</title>
+    <meta name="description" content="Profesjonell dataanalyse, datastrukturering og AI-agentsystemer for bedrifter, studenter og privatpersoner.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Earth-based dark green palette
+                        'earth': {
+                            50: '#f0f5f0',
+                            100: '#d4e5d4',
+                            200: '#a8cba8',
+                            300: '#7cb17c',
+                            400: '#4a8a4a',
+                            500: '#2d5a2d',
+                            600: '#1e4620',
+                            700: '#163618',
+                            800: '#0f2810',
+                            900: '#0a1a0a',
+                        },
+                        'moss': '#3d5a3d',
+                        'forest': '#1a3d1a',
+                        'sage': '#87a987',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .lang-no { display: block; }
+        .lang-en { display: none; }
+
+        html[lang="en"] .lang-no { display: none; }
+        html[lang="en"] .lang-en { display: block; }
+
+        /* Smooth transitions */
+        .lang-no, .lang-en {
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-earth-50 text-earth-900">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-earth-900/95 backdrop-blur-sm z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-earth-100 font-semibold text-xl">
+                        Lande Analyse
+                    </a>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#tjenester" class="text-earth-200 hover:text-white transition">
+                        <span class="lang-no">Tjenester</span>
+                        <span class="lang-en">Services</span>
+                    </a>
+                    <a href="#bedrift" class="text-earth-200 hover:text-white transition">
+                        <span class="lang-no">For bedrifter</span>
+                        <span class="lang-en">For Business</span>
+                    </a>
+                    <a href="#studenter" class="text-earth-200 hover:text-white transition">
+                        <span class="lang-no">For studenter</span>
+                        <span class="lang-en">For Students</span>
+                    </a>
+                    <a href="#kontakt" class="text-earth-200 hover:text-white transition">
+                        <span class="lang-no">Kontakt</span>
+                        <span class="lang-en">Contact</span>
+                    </a>
+                </div>
+
+                <!-- Language Switcher -->
+                <div class="flex items-center space-x-2">
+                    <button onclick="setLanguage('no')" id="btn-no" class="px-2 py-1 text-sm rounded bg-earth-700 text-white">
+                        NO
+                    </button>
+                    <button onclick="setLanguage('en')" id="btn-en" class="px-2 py-1 text-sm rounded text-earth-300 hover:text-white transition">
+                        EN
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-earth-800 via-earth-700 to-forest pt-16">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                <span class="lang-no">Data som driver beslutninger</span>
+                <span class="lang-en">Data that drives decisions</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-earth-200 mb-8 max-w-2xl mx-auto">
+                <span class="lang-no">Profesjonell dataanalyse, strukturering og AI-løsninger for din virksomhet</span>
+                <span class="lang-en">Professional data analysis, structuring and AI solutions for your business</span>
+            </p>
+            <a href="#kontakt" class="inline-block bg-sage hover:bg-earth-400 text-earth-900 font-semibold px-8 py-4 rounded-lg transition transform hover:scale-105">
+                <span class="lang-no">Bestill en gratis samtale</span>
+                <span class="lang-en">Book a free consultation</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="tjenester" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+                <span class="lang-no">Våre tjenester</span>
+                <span class="lang-en">Our Services</span>
+            </h2>
+            <p class="text-earth-600 text-center mb-12 max-w-2xl mx-auto">
+                <span class="lang-no">Skreddersydde løsninger for dine databehov</span>
+                <span class="lang-en">Tailored solutions for your data needs</span>
+            </p>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Data Analysis -->
+                <div class="bg-earth-50 p-6 rounded-xl hover:shadow-lg transition">
+                    <div class="w-12 h-12 bg-earth-600 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">
+                        <span class="lang-no">Dataanalyse</span>
+                        <span class="lang-en">Data Analysis</span>
+                    </h3>
+                    <p class="text-earth-600">
+                        <span class="lang-no">Statistisk analyse, EEG-prosessering, atferdsdata og maskinlæring for dine forsknings- eller forretningsbehov.</span>
+                        <span class="lang-en">Statistical analysis, EEG processing, behavioral data and machine learning for your research or business needs.</span>
+                    </p>
+                </div>
+
+                <!-- Data Structuring -->
+                <div class="bg-earth-50 p-6 rounded-xl hover:shadow-lg transition">
+                    <div class="w-12 h-12 bg-earth-600 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">
+                        <span class="lang-no">Datastrukturering</span>
+                        <span class="lang-en">Data Structuring</span>
+                    </h3>
+                    <p class="text-earth-600">
+                        <span class="lang-no">Organisering, rensing og optimalisering av datasett for effektiv analyse og lagring.</span>
+                        <span class="lang-en">Organization, cleaning and optimization of datasets for efficient analysis and storage.</span>
+                    </p>
+                </div>
+
+                <!-- AI Agent Systems -->
+                <div class="bg-earth-50 p-6 rounded-xl hover:shadow-lg transition">
+                    <div class="w-12 h-12 bg-earth-600 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">
+                        <span class="lang-no">AI-agentsystemer</span>
+                        <span class="lang-en">AI Agent Systems</span>
+                    </h3>
+                    <p class="text-earth-600">
+                        <span class="lang-no">Skreddersydde AI-assistenter og automatiserte arbeidsflyter for din virksomhet.</span>
+                        <span class="lang-en">Custom AI assistants and automated workflows for your business.</span>
+                    </p>
+                </div>
+
+                <!-- Script Review -->
+                <div class="bg-earth-50 p-6 rounded-xl hover:shadow-lg transition">
+                    <div class="w-12 h-12 bg-earth-600 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">
+                        <span class="lang-no">Kodegjennomgang</span>
+                        <span class="lang-en">Script Review</span>
+                    </h3>
+                    <p class="text-earth-600">
+                        <span class="lang-no">Grundig gjennomgang og optimalisering av Python, R og andre analyseskript.</span>
+                        <span class="lang-en">Thorough review and optimization of Python, R and other analysis scripts.</span>
+                    </p>
+                </div>
+
+                <!-- Data Cleaning -->
+                <div class="bg-earth-50 p-6 rounded-xl hover:shadow-lg transition">
+                    <div class="w-12 h-12 bg-earth-600 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">
+                        <span class="lang-no">Datarensing</span>
+                        <span class="lang-en">Data Cleaning</span>
+                    </h3>
+                    <p class="text-earth-600">
+                        <span class="lang-no">Identifisering og håndtering av manglende data, uteliggere og inkonsistenser.</span>
+                        <span class="lang-en">Identification and handling of missing data, outliers and inconsistencies.</span>
+                    </p>
+                </div>
+
+                <!-- Consulting -->
+                <div class="bg-earth-50 p-6 rounded-xl hover:shadow-lg transition">
+                    <div class="w-12 h-12 bg-earth-600 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">
+                        <span class="lang-no">Rådgivning</span>
+                        <span class="lang-en">Consulting</span>
+                    </h3>
+                    <p class="text-earth-600">
+                        <span class="lang-no">Strategisk veiledning om datainnsamling, analyse og implementering.</span>
+                        <span class="lang-en">Strategic guidance on data collection, analysis and implementation.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Business Section -->
+    <section id="bedrift" class="py-20 bg-earth-100">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                        <span class="lang-no">For bedrifter</span>
+                        <span class="lang-en">For Business</span>
+                    </h2>
+                    <p class="text-earth-700 mb-6">
+                        <span class="lang-no">Vi hjelper oppstartsselskaper og etablerte bedrifter med å utnytte datadrevet innsikt for bedre beslutninger.</span>
+                        <span class="lang-en">We help startups and established companies leverage data-driven insights for better decisions.</span>
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-earth-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="lang-no">Produktvalidering og markedsanalyse</span>
+                            <span class="lang-en">Product validation and market analysis</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-earth-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="lang-no">Automatiserte rapporter og dashboards</span>
+                            <span class="lang-en">Automated reports and dashboards</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-earth-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="lang-no">GDPR-kompatibel datahåndtering</span>
+                            <span class="lang-en">GDPR-compliant data handling</span>
+                        </li>
+                    </ul>
+                    <a href="#kontakt" class="inline-block bg-earth-700 hover:bg-earth-600 text-white px-6 py-3 rounded-lg transition">
+                        <span class="lang-no">Få et tilbud</span>
+                        <span class="lang-en">Get a quote</span>
+                    </a>
+                </div>
+                <div class="bg-earth-200 h-64 rounded-xl flex items-center justify-center">
+                    <span class="text-earth-500 text-sm">
+                        <span class="lang-no">[Bilde: Forretningsanalyse]</span>
+                        <span class="lang-en">[Image: Business analytics]</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Students Section -->
+    <section id="studenter" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1 bg-earth-200 h-64 rounded-xl flex items-center justify-center">
+                    <span class="text-earth-500 text-sm">
+                        <span class="lang-no">[Bilde: Studenthjelp]</span>
+                        <span class="lang-en">[Image: Student assistance]</span>
+                    </span>
+                </div>
+                <div class="order-1 md:order-2">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                        <span class="lang-no">For studenter</span>
+                        <span class="lang-en">For Students</span>
+                    </h2>
+                    <p class="text-earth-700 mb-6">
+                        <span class="lang-no">Vi tilbyr rimelige tjenester for bachelor- og masteroppgaver, med fokus på læring og kvalitet.</span>
+                        <span class="lang-en">We offer affordable services for bachelor and master theses, focusing on learning and quality.</span>
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-earth-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="lang-no">Statistisk veiledning og analyse</span>
+                            <span class="lang-en">Statistical guidance and analysis</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-earth-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="lang-no">Hjelp med Python, R og SPSS</span>
+                            <span class="lang-en">Help with Python, R and SPSS</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-earth-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="lang-no">Studentvennlige priser</span>
+                            <span class="lang-en">Student-friendly pricing</span>
+                        </li>
+                    </ul>
+                    <a href="#kontakt" class="inline-block bg-earth-700 hover:bg-earth-600 text-white px-6 py-3 rounded-lg transition">
+                        <span class="lang-no">Kontakt oss</span>
+                        <span class="lang-en">Contact us</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Private Persons Section -->
+    <section id="privat" class="py-20 bg-earth-100">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                        <span class="lang-no">For privatpersoner</span>
+                        <span class="lang-en">For Individuals</span>
+                    </h2>
+                    <p class="text-earth-700 mb-6">
+                        <span class="lang-no">Har du personlige prosjekter eller data du vil forstå bedre? Vi hjelper deg.</span>
+                        <span class="lang-en">Do you have personal projects or data you want to understand better? We can help.</span>
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-earth-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="lang-no">Personlig helsedata-analyse</span>
+                            <span class="lang-en">Personal health data analysis</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-earth-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="lang-no">Hobbyprosjekter og datavisualisering</span>
+                            <span class="lang-en">Hobby projects and data visualization</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-earth-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="lang-no">Enkel forklaring av resultater</span>
+                            <span class="lang-en">Simple explanation of results</span>
+                        </li>
+                    </ul>
+                    <a href="#kontakt" class="inline-block bg-earth-700 hover:bg-earth-600 text-white px-6 py-3 rounded-lg transition">
+                        <span class="lang-no">Snakk med oss</span>
+                        <span class="lang-en">Talk to us</span>
+                    </a>
+                </div>
+                <div class="bg-earth-200 h-64 rounded-xl flex items-center justify-center">
+                    <span class="text-earth-500 text-sm">
+                        <span class="lang-no">[Bilde: Personlig analyse]</span>
+                        <span class="lang-en">[Image: Personal analysis]</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="kontakt" class="py-20 bg-earth-800">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-4">
+                <span class="lang-no">Ta kontakt</span>
+                <span class="lang-en">Get in Touch</span>
+            </h2>
+            <p class="text-earth-200 text-center mb-12">
+                <span class="lang-no">Vi svarer vanligvis innen 24 timer</span>
+                <span class="lang-en">We usually respond within 24 hours</span>
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Contact Info -->
+                <div class="text-earth-100">
+                    <div class="mb-6">
+                        <h3 class="font-semibold mb-2">Email</h3>
+                        <a href="mailto:lande.analysis@gmail.com" class="text-sage hover:text-white transition">
+                            lande.analysis@gmail.com
+                        </a>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="font-semibold mb-2">
+                            <span class="lang-no">Telefon</span>
+                            <span class="lang-en">Phone</span>
+                        </h3>
+                        <a href="tel:+4795363316" class="text-sage hover:text-white transition">
+                            +47 953 63 316
+                        </a>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">
+                            <span class="lang-no">Lokasjon</span>
+                            <span class="lang-en">Location</span>
+                        </h3>
+                        <p>Oslo, Norge</p>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-4">
+                    <div>
+                        <input type="text" name="name" required placeholder="Navn / Name"
+                               class="w-full px-4 py-3 rounded-lg bg-earth-700 text-white placeholder-earth-300 border border-earth-600 focus:border-sage focus:outline-none">
+                    </div>
+                    <div>
+                        <input type="email" name="email" required placeholder="E-post / Email"
+                               class="w-full px-4 py-3 rounded-lg bg-earth-700 text-white placeholder-earth-300 border border-earth-600 focus:border-sage focus:outline-none">
+                    </div>
+                    <div>
+                        <textarea name="message" rows="4" required placeholder="Melding / Message"
+                                  class="w-full px-4 py-3 rounded-lg bg-earth-700 text-white placeholder-earth-300 border border-earth-600 focus:border-sage focus:outline-none resize-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-sage hover:bg-earth-400 text-earth-900 font-semibold py-3 rounded-lg transition">
+                        <span class="lang-no">Send melding</span>
+                        <span class="lang-en">Send message</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-earth-900 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-earth-400 text-sm">
+                &copy; 2025 Lande Analyse.
+                <span class="lang-no">Alle rettigheter reservert.</span>
+                <span class="lang-en">All rights reserved.</span>
+            </p>
+            <p class="text-earth-500 text-xs mt-2">
+                Org.nr: 936 560 636
+            </p>
+        </div>
+    </footer>
+
+    <!-- Language Switcher Script -->
+    <script>
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+
+            // Update button styles
+            const btnNo = document.getElementById('btn-no');
+            const btnEn = document.getElementById('btn-en');
+
+            if (lang === 'no') {
+                btnNo.className = 'px-2 py-1 text-sm rounded bg-earth-700 text-white';
+                btnEn.className = 'px-2 py-1 text-sm rounded text-earth-300 hover:text-white transition';
+            } else {
+                btnEn.className = 'px-2 py-1 text-sm rounded bg-earth-700 text-white';
+                btnNo.className = 'px-2 py-1 text-sm rounded text-earth-300 hover:text-white transition';
+            }
+
+            // Save preference
+            localStorage.setItem('lang', lang);
+        }
+
+        // Load saved language preference
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('lang') || 'no';
+            setLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>
