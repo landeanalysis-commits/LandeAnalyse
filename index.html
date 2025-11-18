@@ -55,6 +55,30 @@
         .lang-no, .lang-en {
             transition: opacity 0.3s ease;
         }
+
+        /* Video text masking effect */
+        .video-text-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .video-text {
+            background-size: cover;
+            background-position: center;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        /* Fallback for browsers without background-clip support */
+        @supports not (-webkit-background-clip: text) {
+            .video-text {
+                background: none;
+                -webkit-text-fill-color: white;
+                color: white;
+            }
+        }
     </style>
 </head>
 <body class="bg-earth-50 text-earth-900">
@@ -117,10 +141,24 @@
     <!-- Hero Section -->
     <section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-earth-800 via-earth-700 to-forest pt-16">
         <div class="max-w-4xl mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
-                <span class="lang-no">Demokratisering av datakonsultering</span>
-                <span class="lang-en">Democratising Data Consulting</span>
-            </h1>
+            <!-- Video text container -->
+            <div class="video-text-container mb-6">
+                <!-- Hidden video element for the text fill -->
+                <video
+                    id="heroVideo"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    class="hidden">
+                    <source src="Adobe Express - aobe mix23.mp4" type="video/mp4">
+                </video>
+
+                <h1 class="video-text text-6xl md:text-6xl font-bold">
+                    <span class="lang-no">Demokratisering av datakonsultering</span>
+                    <span class="lang-en">Democratising Data Consulting</span>
+                </h1>
+            </div>
             <p class="text-xl md:text-2xl text-earth-200 mb-8 max-w-2xl mx-auto">
                 <span class="lang-no">Profesjonell kompetanse gjort tilgjengelig for alle</span>
                 <span class="lang-en">Professional expertise made available to all</span>
@@ -518,7 +556,7 @@
                         <span class="lang-no">Store aktører har lenge hatt monopol på god datastøtte. Samtidig er KI alene for usikkert til å stole blindt på. Mange mangler tid, ressurser og trygge alternativer i en hverdag der det handler mindre om småoppgavene og mer om de store idéene, og ender opp i en KI-russisk rulett. Vi tilbyr en løsning der ekte datakompetanse møter forskningsbasert KI-bruk, slik at alle får tilgang til pålitelige og rimelige resultater, og hvor vi bidrar til innovativ vekst i mindre norske initiativer.</span>
                         <span class="lang-en">Large companies have long held a monopoly on high-quality data support. At the same time, AI alone is too unreliable to trust blindly. Many people lack time, resources, and safe alternatives in today’s world, where it’s less about the smaller tasks and more about the bigger ideas, and end up in an AI “Russian roulette.” We offer a solution where real data expertise meets research-based AI use, giving everyone access to reliable and affordable results while supporting innovative growth in smaller norwegian initiatives.</span>
                     </p>
-                    <p class="text-earth-700 italic">
+                    <p class="text-earth-700 italic mb-6">
                         <span class="lang-no">Enten du er en forskningsinstitusjon, en oppstartsbedrift, eller en student, vi møter deg der du er. Datakonsultering for alle!</span>
                         <span class="lang-en">Whether you're a research institution, a startup, or a student, we meet you where you are. Data consulting for everyone!</span>
                     </p>
@@ -526,11 +564,11 @@
                         <span class="lang-no">Vårt mål</span>
                         <span class="lang-en">Our goal</span>
                     </h3>
-                    <p class="text-earth-700 mb-6">
+                    <p class="text-earth-700 font-bold mb-6">
                         <span class="lang-no">1. Nå klienter som ikke ellers har muligheten til å hyre inn konsulenter, som ønsker et rimeligere alternativ, eller som bare.</span>
                         <span class="lang-en">Founded in Oslo by Victor-Jose Aravena Lande, who holds a Master’s degree in Neuroscience from the University of Oslo and has experience as a Lead Research Technician at CANlab: a prominent laboratory in cognitive and affective neuroscience that also studies human interaction with AI. There, he worked with large and complex brain datasets across multiple formats. Together with a close circle of hardworking, technology-driven innovators, Victor-Jose was motivated to make consultation and knowledge accessible and affordable for everyone. With fresh expertise in AI-agent solutions, work can now be done far more efficiently than before, and he intends to use that to help others!</span>
                     </p>
-                    <p class="text-earth-700 mb-6">
+                    <p class="text-earth-700 font-bold mb-6">
                         <span class="lang-no">2. Lage en plattform hvor nyutdannede kan få muligheten til å raskt bygge kompetanse og erfaringer innenfor sine spesialiteter.</span>
                         <span class="lang-en">Founded in Oslo by Victor-Jose Aravena Lande, who holds a Master’s degree in Neuroscience from the University of Oslo and has experience as a Lead Research Technician at CANlab: a prominent laboratory in cognitive and affective neuroscience that also studies human interaction with AI. There, he worked with large and complex brain datasets across multiple formats. Together with a close circle of hardworking, technology-driven innovators, Victor-Jose was motivated to make consultation and knowledge accessible and affordable for everyone. With fresh expertise in AI-agent solutions, work can now be done far more efficiently than before, and he intends to use that to help others!</span>
                     </p>
@@ -612,7 +650,7 @@
                             <span class="lang-no">Lokasjon</span>
                             <span class="lang-en">Location</span>
                         </h3>
-                        <p>Oslo, Norge</p>
+                        <p class="text-sage">Oslo, Norge</p>
                     </div>
                 </div>
 
@@ -682,6 +720,53 @@
         document.addEventListener('DOMContentLoaded', function() {
             const savedLang = localStorage.getItem('lang') || 'no';
             setLanguage(savedLang);
+        });
+    </script>
+
+    <!-- Video Text Effect Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('heroVideo');
+            const textElement = document.querySelector('.video-text');
+
+            if (!video || !textElement) return;
+
+            // Create canvas for video frame capture
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            let lastTime = 0;
+            const frameInterval = 33; // ~30fps for performance
+
+            function updateTextBackground(currentTime) {
+                if (currentTime - lastTime >= frameInterval) {
+                    if (video.readyState >= video.HAVE_CURRENT_DATA) {
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        ctx.drawImage(video, 0, 0);
+
+                        // Convert canvas to data URL and set as background
+                        const dataURL = canvas.toDataURL('image/jpeg', 0.8);
+                        textElement.style.backgroundImage = `url(${dataURL})`;
+                    }
+                    lastTime = currentTime;
+                }
+                requestAnimationFrame(updateTextBackground);
+            }
+
+            // Start the animation loop when video is ready
+            video.addEventListener('loadeddata', function() {
+                requestAnimationFrame(updateTextBackground);
+            });
+
+            // Ensure video plays (handle autoplay restrictions)
+            video.play().catch(function(error) {
+                console.log('Video autoplay prevented:', error);
+                // Fallback: start video on user interaction
+                document.addEventListener('click', function() {
+                    video.play();
+                }, { once: true });
+            });
         });
     </script>
 </body>
