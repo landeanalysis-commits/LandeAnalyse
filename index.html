@@ -55,30 +55,6 @@
         .lang-no, .lang-en {
             transition: opacity 0.3s ease;
         }
-
-        /* Video text masking effect */
-        .video-text-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        .video-text {
-            background-size: cover;
-            background-position: center;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-        }
-
-        /* Fallback for browsers without background-clip support */
-        @supports not (-webkit-background-clip: text) {
-            .video-text {
-                background: none;
-                -webkit-text-fill-color: white;
-                color: white;
-            }
-        }
     </style>
 </head>
 <body class="bg-earth-50 text-earth-900">
@@ -139,26 +115,17 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-earth-800 via-earth-700 to-forest pt-16">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <!-- Video text container -->
-            <div class="video-text-container mb-6">
-                <!-- Hidden video element for the text fill -->
-                <video
-                    id="heroVideo"
-                    autoplay
-                    muted
-                    loop
-                    playsinline
-                    class="hidden">
-                    <source src="Adobe Express - aobe mix23.mp4" type="video/mp4">
-                </video>
+    <section class="min-h-screen flex items-center justify-center relative pt-16">
+        <!-- Background Image -->
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('assets/images/handshake-bunad.jpg');"></div>
+        <!-- Gradient Overlay for readability -->
+        <div class="absolute inset-0 bg-gradient-to-br from-earth-800/80 via-earth-700/70 to-forest/80"></div>
 
-                <h1 class="video-text text-4xl md:text-7xl font-bold">
-                    <span class="lang-no">Demokratisering av datakonsultering</span>
-                    <span class="lang-en">Democratising Data Consulting</span>
-                </h1>
-            </div>
+        <div class="relative max-w-4xl mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-7xl font-bold text-white mb-6">
+                <span class="lang-no">Demokratisering av datakonsultering</span>
+                <span class="lang-en">Democratising Data Consulting</span>
+            </h1>
             <p class="text-xl md:text-2xl text-earth-200 mb-8 max-w-2xl mx-auto">
                 <span class="lang-no">Profesjonell kompetanse gjort tilgjengelig for alle</span>
                 <span class="lang-en">Professional expertise made available to all</span>
@@ -346,11 +313,10 @@
                         <span class="lang-en">Recieve an offer</span>
                     </a>
                 </div>
-                <div class="bg-earth-200 h-64 rounded-xl flex items-center justify-center">
-                    <span class="text-earth-500 text-sm">
-                        <span class="lang-no">[Bilde: Forretningsanalyse]</span>
-                        <span class="lang-en">[Image: Business analytics]</span>
-                    </span>
+                <div class="h-64 rounded-xl overflow-hidden">
+                    <img src="assets/images/hand-slips.jpg"
+                         alt="Business analytics and consulting"
+                         class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
@@ -360,11 +326,10 @@
     <section id="studenter" class="py-20 bg-white">
         <div class="max-w-6xl mx-auto px-4">
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="order-2 md:order-1 bg-earth-200 h-64 rounded-xl flex items-center justify-center">
-                    <span class="text-earth-500 text-sm">
-                        <span class="lang-no">[Bilde: Studenthjelp]</span>
-                        <span class="lang-en">[Image: Student assistance]</span>
-                    </span>
+                <div class="order-2 md:order-1 h-64 rounded-xl overflow-hidden">
+                    <img src="assets/images/hand-skulder-bunad.jpg"
+                         alt="Student assistance and guidance"
+                         class="w-full h-full object-cover">
                 </div>
                 <div class="order-1 md:order-2">
                     <h2 class="text-3xl md:text-4xl font-bold mb-6">
@@ -448,11 +413,10 @@
                         <span class="lang-en">Talk to us!</span>
                     </a>
                 </div>
-                <div class="bg-earth-200 h-64 rounded-xl flex items-center justify-center">
-                    <span class="text-earth-500 text-sm">
-                        <span class="lang-no">[Bilde: Personlig analyse]</span>
-                        <span class="lang-en">[Image: Personal analysis]</span>
-                    </span>
+                <div class="h-64 rounded-xl overflow-hidden">
+                    <img src="assets/images/peke-bunad-person.jpg"
+                         alt="Personal data analysis"
+                         class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
@@ -573,24 +537,34 @@
                         <span class="lang-en">2. Create a platform where recent graduates can quickly build competence and experience within their specialties.</span>
                     </p>
                 </div>
-                <div class="space-y-9">
-                    <div class="bg-earth-200 h-60 rounded-xl flex items-center justify-center">
-                    <span class="text-earth-500 text-sm">
-                        <span class="lang-no">[Bilde: Team/person]</span>
-                        <span class="lang-en">[Image: Team/person]</span>
-                    </span>
+                <div class="space-y-6">
+                    <!-- Image 1: "We see data differently" -->
+                    <div class="bg-earth-200 h-48 rounded-xl flex items-center justify-center overflow-hidden">
+                        <span class="text-earth-500 text-sm">
+                            <span class="lang-no">[Bilde: Data perspektiv]</span>
+                            <span class="lang-en">[Image: Data perspective]</span>
+                        </span>
                     </div>
-                    <div class="bg-earth-200 h-64 rounded-xl flex items-center justify-center">
-                    <span class="text-earth-500 text-sm">
-                        <span class="lang-no">[Bilde: Team/person]</span>
-                        <span class="lang-en">[Image: Team/person]</span>
-                    </span>
+                    <!-- Image 2: "Who We Are" -->
+                    <div class="bg-earth-200 h-48 rounded-xl flex items-center justify-center overflow-hidden">
+                        <span class="text-earth-500 text-sm">
+                            <span class="lang-no">[Bilde: Victor-Jose / Team]</span>
+                            <span class="lang-en">[Image: Victor-Jose / Team]</span>
+                        </span>
                     </div>
-                    <div class="bg-earth-200 h-64 rounded-xl flex items-center justify-center">
-                    <span class="text-earth-500 text-sm">
-                        <span class="lang-no">[Bilde: Team/person]</span>
-                        <span class="lang-en">[Image: Team/person]</span>
-                    </span>
+                    <!-- Image 3: "Why We Do This" -->
+                    <div class="bg-earth-200 h-48 rounded-xl flex items-center justify-center overflow-hidden">
+                        <span class="text-earth-500 text-sm">
+                            <span class="lang-no">[Bilde: Misjon/Verdier]</span>
+                            <span class="lang-en">[Image: Mission/Values]</span>
+                        </span>
+                    </div>
+                    <!-- Image 4: "Our Goal" -->
+                    <div class="bg-earth-200 h-48 rounded-xl flex items-center justify-center overflow-hidden">
+                        <span class="text-earth-500 text-sm">
+                            <span class="lang-no">[Bilde: Mål/Visjon]</span>
+                            <span class="lang-en">[Image: Goal/Vision]</span>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -720,53 +694,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             const savedLang = localStorage.getItem('lang') || 'no';
             setLanguage(savedLang);
-        });
-    </script>
-
-    <!-- Video Text Effect Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const video = document.getElementById('heroVideo');
-            const textElement = document.querySelector('.video-text');
-
-            if (!video || !textElement) return;
-
-            // Create canvas for video frame capture
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-
-            let lastTime = 0;
-            const frameInterval = 33; // ~30fps for performance
-
-            function updateTextBackground(currentTime) {
-                if (currentTime - lastTime >= frameInterval) {
-                    if (video.readyState >= video.HAVE_CURRENT_DATA) {
-                        canvas.width = video.videoWidth;
-                        canvas.height = video.videoHeight;
-                        ctx.drawImage(video, 0, 0);
-
-                        // Convert canvas to data URL and set as background
-                        const dataURL = canvas.toDataURL('image/jpeg', 0.8);
-                        textElement.style.backgroundImage = `url(${dataURL})`;
-                    }
-                    lastTime = currentTime;
-                }
-                requestAnimationFrame(updateTextBackground);
-            }
-
-            // Start the animation loop when video is ready
-            video.addEventListener('loadeddata', function() {
-                requestAnimationFrame(updateTextBackground);
-            });
-
-            // Ensure video plays (handle autoplay restrictions)
-            video.play().catch(function(error) {
-                console.log('Video autoplay prevented:', error);
-                // Fallback: start video on user interaction
-                document.addEventListener('click', function() {
-                    video.play();
-                }, { once: true });
-            });
         });
     </script>
 </body>
