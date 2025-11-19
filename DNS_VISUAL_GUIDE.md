@@ -29,7 +29,7 @@ A       @       185.199.108.153                3600
 A       @       185.199.109.153                3600
 A       @       185.199.110.153                3600
 A       @       185.199.111.153                3600
-CNAME   www     landeanalyse.no                3600
+CNAME   www     hgrfrdk.github.io              3600
 ```
 
 ### Breaking It Down
@@ -40,9 +40,9 @@ CNAME   www     landeanalyse.no                3600
 - They all point to GitHub's data centers
 
 **CNAME Record (www subdomain):**
-- This tells DNS: "When someone visits www.landeanalyse.no, use the same server as landeanalyse.no"
-- Saves you from adding 4 more A records
-- Only one CNAME needed
+- This tells DNS: "When someone visits www.landeanalyse.no, send them to GitHub Pages"
+- **Important:** Must point directly to `hgrfrdk.github.io`, NOT to `landeanalyse.no`
+- If you point www to the apex domain, GitHub cannot issue SSL certificates for both domains
 
 ---
 
@@ -85,7 +85,7 @@ Your Repository:
 │  │ A  @ → 185.199.110.153  }                            │      │
 │  │ A  @ → 185.199.111.153  }                            │      │
 │  │                                                      │      │
-│  │ CNAME www → landeanalyse.no                         │      │
+│  │ CNAME www → hgrfrdk.github.io                       │      │
 │  └──────────────────────────────────────────────────────┘      │
 └────────────────────┬─────────────────────────────────────────────┘
                      │
@@ -216,6 +216,21 @@ The concept is the same - fill in Type, Name, and Value fields.
 
 ### Q: What about email? Will email still work?
 **A:** Email is separate from web hosting. Your email at your domain (if you have it) won't be affected by this change.
+
+### Q: Why is "Enforce HTTPS" grayed out in GitHub Pages?
+**A:** This usually means GitHub cannot issue an SSL certificate for all your domains. Common causes:
+1. **www CNAME points to apex domain** - The www subdomain must point directly to `username.github.io`, NOT to your apex domain (e.g., landeanalyse.no). If www points to the apex, GitHub cannot validate it for SSL.
+2. **DNS not fully propagated** - Wait 30-60 minutes after making DNS changes.
+3. **CAA records blocking Let's Encrypt** - If you have CAA records, add `0 issue "letsencrypt.org"`.
+
+To diagnose, check if HTTPS works on both domains:
+```bash
+curl -I https://landeanalyse.no
+curl -I https://www.landeanalyse.no
+```
+
+### Q: My domain registrar offers free SSL. Should I use it?
+**A:** No. GitHub Pages provides its own free SSL via Let's Encrypt. Using your registrar's SSL can cause conflicts. Make sure your registrar is only providing DNS services, not hosting or SSL proxying.
 
 ---
 
