@@ -1,0 +1,96 @@
+================================================================================
+QUICK REFERENCE: Connect landeanalyse.no to GitHub Pages
+================================================================================
+
+DOMAIN: landeanalyse.no
+REGISTRAR: domene.no
+HOSTING: GitHub Pages
+
+================================================================================
+STEP-BY-STEP (READ DOMAIN_SETUP_GUIDE.md FOR FULL DETAILS)
+================================================================================
+
+1. LOGIN TO: gungir.domene.no
+   - Go to your domene account
+   - Find DNS settings for landeanalyse.no
+
+2. ADD 4 A RECORDS (all in DNS settings):
+   185.199.108.153
+   185.199.109.153
+   185.199.110.153
+   185.199.111.153
+
+   (For each: Type=A, Name=@ or blank, TTL=3600)
+
+3. ADD 1 CNAME RECORD:
+   Name: www
+   Target: landeanalyse.no
+   (Type=CNAME, TTL=3600)
+
+4. GO TO GITHUB.COM:
+   - Open repository: LandeAnalyse
+   - Settings > Pages
+   - Custom domain: landeanalyse.no
+   - Wait for verification
+   - Enable HTTPS
+
+5. TEST:
+   - Visit https://landeanalyse.no
+   - Should show your website (may take 2-5 minutes)
+
+================================================================================
+IMPORTANT IPs TO ADD (EXACT)
+================================================================================
+
+A Record 1: 185.199.108.153
+A Record 2: 185.199.109.153
+A Record 3: 185.199.110.153
+A Record 4: 185.199.111.153
+
+CNAME: www → landeanalyse.no
+
+================================================================================
+CNAME FILE
+================================================================================
+
+Already created in repository: /CNAME
+Content: landeanalyse.no
+(GitHub Pages uses this to verify domain configuration)
+
+================================================================================
+TIMELINE
+================================================================================
+
+Immediate:   GitHub validates DNS (5 min)
+Short-term:  Domain works (5 min - 2 hours)
+Full sync:   All servers updated (24-48 hours, doesn't affect you)
+
+================================================================================
+DO NOT NEED
+================================================================================
+
+✗ phpMyAdmin (no database)
+✗ File Manager (GitHub manages files)
+✗ Server configuration in control panel
+✗ Create additional website in hosting panel
+
+YOU ONLY NEED: DNS SETTINGS
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Site not working?
+1. Wait 2-5 minutes (DNS takes time)
+2. Hard refresh: Ctrl+F5 (Windows) or Cmd+Shift+R (Mac)
+3. Check all 4 A records are added correctly
+4. Check CNAME record for www subdomain
+5. Verify GitHub Pages settings show the custom domain
+
+HTTPS not available?
+- Wait 10 minutes for SSL certificate
+- Check back in GitHub Pages settings
+
+Full guide: Read DOMAIN_SETUP_GUIDE.md in this repository
+
+================================================================================
