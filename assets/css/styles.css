@@ -1,0 +1,31 @@
+/**
+ * Custom Styles for Lande Analyse
+ * landeanalyse.no
+ */
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Language Switcher Styles */
+.lang-no {
+    display: block;
+}
+
+.lang-en {
+    display: none;
+}
+
+html[lang="en"] .lang-no {
+    display: none;
+}
+
+html[lang="en"] .lang-en {
+    display: block;
+}
+
+/* Smooth transitions for language switching */
+.lang-no,
+.lang-en {
+    transition: opacity 0.3s ease;
+}

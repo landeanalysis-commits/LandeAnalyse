@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "version": "1.0",
+    "lastUpdated": "2025-11-24",
+    "description": "Portfolio entries for Lande Analyse website"
+  },
+  "items": [
+    {
+      "id": "precision-psychiatry",
+      "order": 1,
+      "featured": true,
+      "tags": ["dataanalyse", "data-cleaning", "datastructuring"],
+      "title": {
+        "no": "Senter for Presisjonspsykiatri, Ullevål",
+        "en": "Centre for Precision Psychiatry, Ullevål"
+      },
+      "url": {
+        "no": "https://www.med.uio.no/klinmed/forskning/sentre/presisjonspsykiatri/",
+        "en": "https://www.med.uio.no/klinmed/english/research/centres/precision-psychiatry/"
+      },
+      "description": {
+        "no": "Undersøke potensialet av Normative Modeller over tre tidspunkt for å finne små forskjeller i sjeldne genetiske bærere, inkluderer kartlegging av utvikling og prediksjon.",
+        "en": "Testing the potensial of Normative Modelling over three timepoints in finding subtle differences in a rare genetic group, including trajectories of development and prediction."
+      },
+      "tools": {
+        "no": "Python, R, Bash, FreeSurfer, TSD",
+        "en": "Python, R, Bash, Freesurfer, TSD"
+      },
+      "methods": {
+        "no": "Maskinlæring, Normativ Modellering, MRI-preprosessering, Multi-modal Longitunell Analyse.",
+        "en": "Machine Learning, Normative Modelling, MRI-preprocessing, Multimodal Longitudinal Analysis."
+      }
+    },
+    {
+      "id": "canlab",
+      "order": 2,
+      "featured": true,
+      "tags": ["dataanalyse", "consulting", "datastructuring", "automatisation"],
+      "title": {
+        "no": "CANlab, Universitetet i Oslo",
+        "en": "CANlab, University of Oslo"
+      },
+      "url": {
+        "no": "https://www.sv.uio.no/psi/forskning/grupper/canlab/index.html",
+        "en": "https://www.sv.uio.no/psi/english/research/groups/canlab/index.html"
+      },
+      "description": {
+        "no": "Datainnsamling, dataanalyse (spørreskjema-, personlighets- og kognitive data) og effektivisering av online deltakeradministrasjon og registrering for enkeltprosjekter. Datainnsamlingen ble økte med 101% og prosjektleder ble i stor grad fri fra datainnsamlingen og deltakeradministrasjonen.",
+        "en": "Data collection, data analysis (questionnaire-, personality- and cognitive data), and streamlining of online participant administration and registration for individual projects. Data collection increased by 101%, and the project leader was largely freed from data collection and participant administration."
+      },
+      "tools": {
+        "no": "Google Apps Scripts, Google Sheets, Google Gmail, Python, R",
+        "en": "Google Apps Scripts, Google Sheets, Google Gmail, Python, R"
+      },
+      "methods": {
+        "no": "Gmail-automatisering, datasett analyse, dashboard",
+        "en": "Gmail-automatisation, dataset analysis, dashboard"
+      }
+    },
+    {
+      "id": "landeanalyse-website",
+      "order": 3,
+      "featured": true,
+      "tags": ["website"],
+      "title": {
+        "no": "Landeanalyse.no",
+        "en": "Landeanalyse.no"
+      },
+      "url": {
+        "no": "https://landeanalyse.no",
+        "en": "https://landeanalyse.no"
+      },
+      "description": {
+        "no": "Som et eksempel på foretakets nettside kompetanse. Nettside for landeanalyse.no på norsk og engelsk med blant annet interaktive elementer, stilig design, kontaktmuligheter og portefølje, med grunnleggende optimalisering for søkeresultater i de største søkemotorene. Nettsiden blir jobbet med kontinuerlig som en del av foretakets image.",
+        "en": "As an example of the company's website competencies: A bilingual website for landeanalyse.no (Norwegian and English) featuring interactive elements, sleek design, contact options, and a portfolio, with basic optimization for visibility in major search engines. The website is continuously updated as part of the company's public image."
+      },
+      "tools": {
+        "no": "HTML, AI-agenter",
+        "en": "HTML, AI-agents"
+      },
+      "methods": {
+        "no": "HTML kode med AI rådgivning",
+        "en": "HTML code with AI consulting"
+      }
+    }
+  ]
+}
