@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "1.0",
-    "lastUpdated": "2025-11-24",
+    "version": "1.1",
+    "lastUpdated": "2025-12-02",
     "description": "Portfolio entries for Lande Analyse website"
   },
   "items": [
@@ -81,6 +81,32 @@
       "methods": {
         "no": "HTML kode med AI rådgivning",
         "en": "HTML code with AI consulting"
+      }
+    },
+    {
+      "id": "dalen-ror-vvs",
+      "order": 4,
+      "featured": true,
+      "tags": ["consulting", "process-optimization", "inventory-management"],
+      "title": {
+        "no": "Dalen Rør & VVS",
+        "en": "Dalen Rør & VVS"
+      },
+      "url": {
+        "no": "#kontakt",
+        "en": "#kontakt"
+      },
+      "description": {
+        "no": "Prosessoptimalisering for enmansrørleggerfirma med fokus på lagerstyring og kostnadsreduksjon. Prosjektet omfatter befaring, behovsanalyse og design av skreddersydd system for registrering av VVS-deler inn og ut av lager samt på oppdrag.",
+        "en": "Process optimization for a one-person plumbing company focused on inventory management and cost reduction. The project includes on-site assessment, needs analysis, and custom system design for tracking plumbing parts in and out of storage and on field assignments."
+      },
+      "tools": {
+        "no": "Befaringsmetodikk, Prosessanalyse, Systemdesign",
+        "en": "On-site Assessment, Business Process Analysis, Custom System Design"
+      },
+      "methods": {
+        "no": "Grundig befaring av lagringsenheten, kartlegging av arbeidsflyt og identifisering av flaskehalser. Utvikling av skreddersydd løsning sammen med bedriftseier for å effektivisere daglig drift og gi bedre økonomisk oversikt.",
+        "en": "Thorough on-site inspection of storage facilities, workflow mapping, and bottleneck identification. Developing a tailored solution with the business owner to streamline daily operations and improve financial oversight."
       }
     }
   ]

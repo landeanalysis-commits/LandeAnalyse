@@ -10,7 +10,9 @@ const TAG_LABELS = {
     'datastructuring': { no: 'Datastrukturering', en: 'Data Structuring' },
     'consulting': { no: 'Rådgivning', en: 'Consulting' },
     'automatisation': { no: 'Automatisering', en: 'Automatisation' },
-    'website': { no: 'Nettside', en: 'Website' }
+    'website': { no: 'Nettside', en: 'Website' },
+    'process-optimization': { no: 'Prosessoptimalisering', en: 'Process Optimization' },
+    'inventory-management': { no: 'Lagerstyring', en: 'Inventory Management' }
 };
 
 /**
