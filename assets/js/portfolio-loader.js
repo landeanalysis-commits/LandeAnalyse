@@ -12,7 +12,9 @@ const TAG_LABELS = {
     'automatisation': { no: 'Automatisering', en: 'Automatisation' },
     'website': { no: 'Nettside', en: 'Website' },
     'process-optimization': { no: 'Prosessoptimalisering', en: 'Process Optimization' },
-    'inventory-management': { no: 'Lagerstyring', en: 'Inventory Management' }
+    'inventory-management': { no: 'Lagerstyring', en: 'Inventory Management' },
+    'administrative-assistance': { no: 'Administrativ assistanse', en: 'Administrative Assistance' },
+    'communication-coordination': { no: 'Kommunikasjonskoordinering', en: 'Communication Coordination' }
 };
 
 /**
