@@ -1,13 +1,13 @@
 {
   "meta": {
     "version": "1.1",
-    "lastUpdated": "2025-12-02",
+    "lastUpdated": "2025-12-03",
     "description": "Portfolio entries for Lande Analyse website"
   },
   "items": [
     {
       "id": "precision-psychiatry",
-      "order": 1,
+      "order": 4,
       "featured": true,
       "tags": ["dataanalyse", "data-cleaning", "datastructuring"],
       "title": {
@@ -33,7 +33,7 @@
     },
     {
       "id": "canlab",
-      "order": 2,
+      "order": 3,
       "featured": true,
       "tags": ["dataanalyse", "consulting", "datastructuring", "automatisation"],
       "title": {
@@ -59,7 +59,7 @@
     },
     {
       "id": "landeanalyse-website",
-      "order": 3,
+      "order": 5,
       "featured": true,
       "tags": ["website"],
       "title": {
@@ -85,7 +85,7 @@
     },
     {
       "id": "dalen-ror-vvs",
-      "order": 4,
+      "order": 2,
       "featured": true,
       "tags": ["consulting", "process-optimization", "inventory-management"],
       "title": {
@@ -107,6 +107,32 @@
       "methods": {
         "no": "Grundig befaring av lagringsenheten, kartlegging av arbeidsflyt og identifisering av flaskehalser. Utvikling av skreddersydd løsning sammen med bedriftseier for å effektivisere daglig drift og gi bedre økonomisk oversikt.",
         "en": "Thorough on-site inspection of storage facilities, workflow mapping, and bottleneck identification. Developing a tailored solution with the business owner to streamline daily operations and improve financial oversight."
+      }
+    },
+    {
+      "id": "evje-hornnes-pensjonistforening",
+      "order": 1,
+      "featured": true,
+      "tags": ["administrative-assistance", "consulting", "communication-coordination"],
+      "title": {
+        "no": "Evje- og Hornnes pensjonistforening",
+        "en": "Evje and Hornnes Pensioners Association"
+      },
+      "url": {
+        "no": "#kontakt",
+        "en": "#kontakt"
+      },
+      "description": {
+        "no": "Administrativ assistanse og konsultasjon for styreleder ved pensjonistforeningen. Prosjektet omfattet organisering av struktur for administrative arbeidsflyter, etablering av prosesser fra innkalling til medlemsmøter og styremøter til publisering i Fædrelandsvennen avis.",
+        "en": "Administrative assistance and consultation for the board leader of the pensioners association. The project involved organizing structures for administrative workflows and establishing processes from member and board meeting invitations to publishing in Fædrelandsvennen newspaper."
+      },
+      "tools": {
+        "no": "Microsoft Word, Outlook, Kommunikasjonskoordinering",
+        "en": "Microsoft Word, Outlook, Communication Coordination"
+      },
+      "methods": {
+        "no": "Prosessmapping, arbeidsflytkartlegging, etablering av standardiserte maler og kommunikasjonsrutiner mellom pensjonistforeningen og publikasjonsmedium.",
+        "en": "Process mapping, workflow documentation, establishment of standardized templates and communication routines between the association and publishing medium."
       }
     }
   ]
