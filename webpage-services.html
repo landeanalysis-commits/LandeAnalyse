@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="no" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lage Nettside | Lande Analyse - Rimelige Webløsninger</title>
+    <meta name="description" content="Rimelige og profesjonelle nettsider for små bedrifter, enkeltpersonsforetak og privatpersoner. Enkelt, stilfullt og tilgjengelig.">
+    <meta name="google-site-verification" content="jyXuS12s3YZhxuXLaqV9pKeUUHJJ7QLTgNyFMdPVn8I">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/png" href="/assets/icons/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/assets/icons/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/assets/icons/favicon-48x48.png" sizes="48x48" />
+    <link rel="icon" type="image/png" href="/assets/icons/favicon-96x96.png" sizes="96x96" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="LandeAnalyse" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Earth-based dark green palette
+                        'earth': {
+                            50: '#f0f5f0',
+                            100: '#d4e5d4',
+                            200: '#a8cba8',
+                            300: '#7cb17c',
+                            400: '#4a8a4a',
+                            500: '#2d5a2d',
+                            600: '#1e4620',
+                            700: '#163618',
+                            800: '#0f2810',
+                            900: '#0a1a0a',
+                        },
+                        'moss': '#3d5a3d',
+                        'forest': '#1a3d1a',
+                        'sage': '#87a987',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Lage Nettside | Lande Analyse - Rimelige Webløsninger">
+    <meta property="og:description" content="Rimelige og profesjonelle nettsider for små bedrifter, enkeltpersonsforetak og privatpersoner.">
+    <meta property="og:url" content="https://landeanalyse.no/webpage-services.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="nb_NO">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2S57R1HHW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-H2S57R1HHW');
+</script>
+
+<body class="bg-earth-50 text-earth-900">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="fixed w-full bg-earth-900/95 backdrop-blur-sm z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="/index.html" class="text-earth-100 font-semibold text-xl">
+                        <span class="lang-no">Lande Analyse</span>
+                        <span class="lang-en">Lande Analysis</span>
+                    </a>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/index.html#tjenester" class="text-earth-200 hover:text-white transition">
+                        <span class="lang-no">Tjenester</span>
+                        <span class="lang-en">Services</span>
+                    </a>
+                    <a href="/webpage-services.html" class="text-white font-semibold">
+                        <span class="lang-no">Lage Nettside</span>
+                        <span class="lang-en">Make Webpage</span>
+                    </a>
+                    <a href="/index.html#kontakt" class="text-earth-200 hover:text-white transition">
+                        <span class="lang-no">Kontakt</span>
+                        <span class="lang-en">Contact</span>
+                    </a>
+                    <a href="/index.html" class="text-earth-200 hover:text-white transition">
+                        <span class="lang-no">Tilbake til Hjem</span>
+                        <span class="lang-en">Back to Home</span>
+                    </a>
+                </div>
+
+                <!-- Language Switcher -->
+                <div class="flex items-center space-x-2">
+                    <button onclick="setLanguage('no')" id="btn-no" class="px-2 py-1 text-sm rounded bg-earth-700 text-white">
+                        NO
+                    </button>
+                    <button onclick="setLanguage('en')" id="btn-en" class="px-2 py-1 text-sm rounded text-earth-300 hover:text-white transition">
+                        EN
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="pt-24 pb-20">
+        <div class="max-w-4xl mx-auto px-4">
+
+            <!-- Page Header -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 text-earth-900">
+                    <span class="lang-no">Trenger du en nettside?</span>
+                    <span class="lang-en">Need a Website?</span>
+                </h1>
+                <p class="text-xl text-earth-700 mb-4 max-w-2xl mx-auto">
+                    <span class="lang-no">Vi lager enkle, stilfulle og rimelige nettsider skreddersydd for små bedrifter, enkeltpersonsforetak og privatpersoner.</span>
+                    <span class="lang-en">We create simple, stylish, and affordable websites tailored for small businesses, sole proprietorships, and individuals.</span>
+                </p>
+            </div>
+
+            <!-- Value Proposition Section -->
+            <div class="bg-white rounded-xl p-8 mb-12 shadow-sm">
+                <h2 class="text-2xl font-semibold mb-4 text-earth-900">
+                    <span class="lang-no">Hvorfor velge oss?</span>
+                    <span class="lang-en">Why Choose Us?</span>
+                </h2>
+                <div class="space-y-4 text-earth-700">
+                    <p>
+                        <span class="lang-no">Vi forstår at mange små aksjeselskap, enkeltpersonsforetak og arbeidsfolk ønsker en profesjonell nettside uten å bruke formuen. Derfor tilbyr vi <strong>rimelige og tilgjengelige webløsninger</strong> som er perfekte for dem som vil ha en enkel nettilstedeværelse uten unødvendig kompleksitet.</span>
+                        <span class="lang-en">We understand that many small corporations, sole proprietorships, and working individuals want a professional website without spending a fortune. That's why we offer <strong>affordable and accessible web solutions</strong> perfect for those who want a simple online presence without unnecessary complexity.</span>
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-6 mt-6">
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-earth-600 mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <div>
+                                <h3 class="font-semibold mb-1">
+                                    <span class="lang-no">Rimelig</span>
+                                    <span class="lang-en">Affordable</span>
+                                </h3>
+                                <p class="text-sm text-earth-600">
+                                    <span class="lang-no">Konkurransedyktige priser for små budsjetter</span>
+                                    <span class="lang-en">Competitive prices for small budgets</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-earth-600 mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <div>
+                                <h3 class="font-semibold mb-1">
+                                    <span class="lang-no">Enkelt</span>
+                                    <span class="lang-en">Simple</span>
+                                </h3>
+                                <p class="text-sm text-earth-600">
+                                    <span class="lang-no">Fokus på det essensielle, ingen overflødige funksjoner</span>
+                                    <span class="lang-en">Focus on essentials, no unnecessary features</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-earth-600 mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <div>
+                                <h3 class="font-semibold mb-1">
+                                    <span class="lang-no">Kvalitet</span>
+                                    <span class="lang-en">Quality</span>
+                                </h3>
+                                <p class="text-sm text-earth-600">
+                                    <span class="lang-no">Profesjonelt resultat med moderne design</span>
+                                    <span class="lang-en">Professional results with modern design</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How It Works Section -->
+            <div class="bg-earth-100 rounded-xl p-8 mb-12">
+                <h2 class="text-2xl font-semibold mb-6 text-earth-900 text-center">
+                    <span class="lang-no">Slik fungerer det</span>
+                    <span class="lang-en">How It Works</span>
+                </h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-earth-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl font-bold">1</span>
+                        </div>
+                        <h3 class="font-semibold mb-2">
+                            <span class="lang-no">Send inn ønske</span>
+                            <span class="lang-en">Submit Request</span>
+                        </h3>
+                        <p class="text-earth-600 text-sm">
+                            <span class="lang-no">Fyll ut skjemaet nedenfor med dine ønsker og behov</span>
+                            <span class="lang-en">Fill out the form below with your wishes and needs</span>
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-earth-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl font-bold">2</span>
+                        </div>
+                        <h3 class="font-semibold mb-2">
+                            <span class="lang-no">Vi diskuterer</span>
+                            <span class="lang-en">We Discuss</span>
+                        </h3>
+                        <p class="text-earth-600 text-sm">
+                            <span class="lang-no">Vi tar kontakt for å avklare detaljer og dine ønsker</span>
+                            <span class="lang-en">We contact you to clarify details and your preferences</span>
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-earth-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl font-bold">3</span>
+                        </div>
+                        <h3 class="font-semibold mb-2">
+                            <span class="lang-no">Tilbud & utkast</span>
+                            <span class="lang-en">Offer & Draft</span>
+                        </h3>
+                        <p class="text-earth-600 text-sm">
+                            <span class="lang-no">Du mottar et tilbud og et foreløpig utkast av nettsiden</span>
+                            <span class="lang-en">You receive an offer and a preliminary draft of the website</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Website Request Form -->
+            <div class="bg-white rounded-xl p-8 shadow-sm">
+                <h2 class="text-2xl font-semibold mb-6 text-earth-900">
+                    <span class="lang-no">Be om et tilbud</span>
+                    <span class="lang-en">Request a Quote</span>
+                </h2>
+                <p class="text-earth-600 mb-6">
+                    <span class="lang-no">Fyll ut skjemaet nedenfor, så tar vi kontakt med deg innen 24 timer for å diskutere ditt prosjekt.</span>
+                    <span class="lang-en">Fill out the form below, and we'll contact you within 24 hours to discuss your project.</span>
+                </p>
+
+                <form action="https://formspree.io/f/xnnwnead" method="POST" class="space-y-6">
+                    <!-- Hidden field to identify this as a webpage request -->
+                    <input type="hidden" name="form_type" value="webpage_request">
+
+                    <!-- Webpage/Company Name -->
+                    <div>
+                        <label class="block text-earth-800 font-medium mb-2">
+                            <span class="lang-no">Nettside navn / Bedriftsnavn</span>
+                            <span class="lang-en">Webpage Name / Company Name</span>
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="text"
+                            name="webpage_name"
+                            required
+                            placeholder="Eks: Min Bedrift AS / E.g., My Business LLC"
+                            class="w-full px-4 py-3 rounded-lg border border-earth-300 focus:border-earth-600 focus:ring-2 focus:ring-earth-200 focus:outline-none">
+                    </div>
+
+                    <!-- Functions/Features -->
+                    <div>
+                        <label class="block text-earth-800 font-medium mb-2">
+                            <span class="lang-no">Funksjoner</span>
+                            <span class="lang-en">Functions</span>
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="text"
+                            name="functions"
+                            required
+                            placeholder="Eks: Kontaktskjema, produktkatalog, bookingsystem / E.g., Contact form, product catalog, booking system"
+                            class="w-full px-4 py-3 rounded-lg border border-earth-300 focus:border-earth-600 focus:ring-2 focus:ring-earth-200 focus:outline-none">
+                        <p class="text-sm text-earth-500 mt-1">
+                            <span class="lang-no">Hvilke funksjoner trenger nettsiden? (f.eks. kontaktskjema, galleri, nettbutikk)</span>
+                            <span class="lang-en">What features does the website need? (e.g., contact form, gallery, online shop)</span>
+                        </p>
+                    </div>
+
+                    <!-- Purpose -->
+                    <div>
+                        <label class="block text-earth-800 font-medium mb-2">
+                            <span class="lang-no">Formål (kort)</span>
+                            <span class="lang-en">Purpose (brief)</span>
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <textarea
+                            name="purpose"
+                            rows="3"
+                            required
+                            placeholder="Eks: Synliggjøre tjenestene våre og få kundekontakt / E.g., Showcase our services and get customer contact"
+                            class="w-full px-4 py-3 rounded-lg border border-earth-300 focus:border-earth-600 focus:ring-2 focus:ring-earth-200 focus:outline-none resize-none"></textarea>
+                        <p class="text-sm text-earth-500 mt-1">
+                            <span class="lang-no">Hva er målet med nettsiden? Hvem er målgruppen?</span>
+                            <span class="lang-en">What is the goal of the website? Who is the target audience?</span>
+                        </p>
+                    </div>
+
+                    <!-- Style Keywords -->
+                    <div>
+                        <label class="block text-earth-800 font-medium mb-2">
+                            <span class="lang-no">Stil-nøkkelord</span>
+                            <span class="lang-en">Style Keywords</span>
+                        </label>
+                        <input
+                            type="text"
+                            name="style_keywords"
+                            placeholder="Eks: Minimalistisk, profesjonell, fargerik, moderne / E.g., Minimalist, professional, colorful, modern"
+                            class="w-full px-4 py-3 rounded-lg border border-earth-300 focus:border-earth-600 focus:ring-2 focus:ring-earth-200 focus:outline-none">
+                        <p class="text-sm text-earth-500 mt-1">
+                            <span class="lang-no">Beskriv stilen du ønsker (f.eks. minimalistisk, fargerik, profesjonell)</span>
+                            <span class="lang-en">Describe the style you want (e.g., minimalist, colorful, professional)</span>
+                        </p>
+                    </div>
+
+                    <!-- Reference -->
+                    <div>
+                        <label class="block text-earth-800 font-medium mb-2">
+                            <span class="lang-no">Referanse nettside eller stil</span>
+                            <span class="lang-en">Reference Webpage or Style</span>
+                        </label>
+                        <input
+                            type="text"
+                            name="reference"
+                            placeholder="Eks: www.eksempel.no (liker fargevalget) / E.g., www.example.com (like the color scheme)"
+                            class="w-full px-4 py-3 rounded-lg border border-earth-300 focus:border-earth-600 focus:ring-2 focus:ring-earth-200 focus:outline-none">
+                        <p class="text-sm text-earth-500 mt-1">
+                            <span class="lang-no">Lenke til en nettside du liker, eller en beskrivelse av ønsket stil</span>
+                            <span class="lang-en">Link to a website you like, or a description of desired style</span>
+                        </p>
+                    </div>
+
+                    <!-- Contact Email -->
+                    <div>
+                        <label class="block text-earth-800 font-medium mb-2">
+                            <span class="lang-no">Din e-post</span>
+                            <span class="lang-en">Your Email</span>
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="email"
+                            name="email"
+                            required
+                            placeholder="din.epost@eksempel.no / your.email@example.com"
+                            class="w-full px-4 py-3 rounded-lg border border-earth-300 focus:border-earth-600 focus:ring-2 focus:ring-earth-200 focus:outline-none">
+                    </div>
+
+                    <!-- Additional Comments -->
+                    <div>
+                        <label class="block text-earth-800 font-medium mb-2">
+                            <span class="lang-no">Kommentar / Ytterligere beskrivelse</span>
+                            <span class="lang-en">Comment / Additional Description</span>
+                        </label>
+                        <textarea
+                            name="additional_comments"
+                            rows="4"
+                            placeholder="Eks: Vi ønsker å inkludere bilder av teamet vårt... / E.g., We want to include pictures of our team..."
+                            class="w-full px-4 py-3 rounded-lg border border-earth-300 focus:border-earth-600 focus:ring-2 focus:ring-earth-200 focus:outline-none resize-none"></textarea>
+                        <p class="text-sm text-earth-500 mt-1">
+                            <span class="lang-no">Eventuell tilleggsinformasjon som kan være nyttig</span>
+                            <span class="lang-en">Any additional information that might be useful</span>
+                        </p>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button
+                        type="submit"
+                        class="w-full bg-earth-700 hover:bg-earth-600 text-white font-semibold py-4 rounded-lg transition transform hover:scale-[1.02] shadow-lg">
+                        <span class="lang-no">Send inn forespørsel</span>
+                        <span class="lang-en">Submit Request</span>
+                    </button>
+
+                    <p class="text-sm text-earth-500 text-center">
+                        <span class="lang-no">Vi svarer vanligvis innen 24 timer, mandag til fredag.</span>
+                        <span class="lang-en">We usually respond within 24 hours, Monday to Friday.</span>
+                    </p>
+                </form>
+            </div>
+
+            <!-- Bottom CTA -->
+            <div class="mt-12 text-center bg-earth-600 text-white rounded-xl p-8">
+                <h3 class="text-2xl font-semibold mb-3">
+                    <span class="lang-no">Klar til å komme online?</span>
+                    <span class="lang-en">Ready to Get Online?</span>
+                </h3>
+                <p class="mb-6">
+                    <span class="lang-no">Send inn din forespørsel i dag, så hjelper vi deg med å bygge en nettside som passer dine behov og budsjett.</span>
+                    <span class="lang-en">Submit your request today, and we'll help you build a website that fits your needs and budget.</span>
+                </p>
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="inline-block bg-white text-earth-700 font-semibold px-8 py-3 rounded-lg hover:bg-earth-50 transition">
+                    <span class="lang-no">Gå til skjemaet</span>
+                    <span class="lang-en">Go to Form</span>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-earth-900 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-earth-400 text-sm">
+                &copy; 2025 Lande Analyse.
+                <span class="lang-no">Alle rettigheter reservert.</span>
+                <span class="lang-en">All rights reserved.</span>
+            </p>
+            <p class="text-earth-500 text-xs mt-2">
+                Org.nr: 936 560 636
+            </p>
+            <p class="text-earth-400 text-sm mt-4">
+                <a href="/index.html" class="hover:text-white transition">
+                    <span class="lang-no">Tilbake til hovedsiden</span>
+                    <span class="lang-en">Back to homepage</span>
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>
