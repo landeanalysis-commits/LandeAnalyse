@@ -42,16 +42,16 @@ html[lang="en"] .lang-en {
         visibility: visible;
         transform: translateY(0);
     }
-
-    .nav-dropdown .dropdown-menu {
-        transform: translateY(-10px);
-    }
 }
 
 /* Dropdown menu base styles */
 .dropdown-menu {
     z-index: 50;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
 }
 
 /* Arrow rotation on hover */
