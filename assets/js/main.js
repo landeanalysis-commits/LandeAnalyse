@@ -36,4 +36,57 @@ function setLanguage(lang) {
 document.addEventListener('DOMContentLoaded', function() {
     const savedLang = localStorage.getItem('lang') || 'no';
     setLanguage(savedLang);
+
+    // Initialize dropdown functionality
+    initDropdowns();
 });
+
+/**
+ * Initialize dropdown menu functionality
+ * Handles both desktop (hover) and mobile (click) behavior
+ */
+function initDropdowns() {
+    const dropdowns = document.querySelectorAll('.nav-dropdown');
+
+    dropdowns.forEach(dropdown => {
+        const trigger = dropdown.querySelector('.dropdown-trigger');
+        const menu = dropdown.querySelector('.dropdown-menu');
+
+        // Handle click for mobile and touch devices
+        trigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            // Only handle clicks on mobile/tablet
+            if (window.innerWidth < 768) {
+                dropdown.classList.toggle('active');
+            }
+        });
+
+        // Close dropdown when clicking menu items
+        const menuItems = menu.querySelectorAll('a');
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                dropdown.classList.remove('active');
+            });
+        });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.nav-dropdown')) {
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
+
+    // Handle escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
+}
