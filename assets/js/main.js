@@ -115,19 +115,7 @@ function initFloatingWidget() {
         </div>
         <div id="session-time">Time: 00:00:00</div>
         <div id="click-count">Clicks: 0</div>
-        <div id="visitor-count">Visitors: <script type="text/javascript">
-var sc_project=13189291;
-var sc_invisible=0;
-var sc_security="8e602a87";
-var scJsHost = "https://";
-document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+
-"statcounter.com/counter/counter.js'></"+"script>");
-</script>
-<noscript><div class="statcounter"><a title="Web Analytics Made Easy -
-Statcounter" href="https://statcounter.com/" target="_blank"><img
-class="statcounter" src="https://c.statcounter.com/13189291/0/8e602a87/0/"
-alt="Web Analytics Made Easy - Statcounter"
-referrerPolicy="no-referrer-when-downgrade"></a></div></noscript></div>
+        <div id="visitor-count">Visitors: Loading...</div>
     `;
 
     // Append to body
@@ -168,4 +156,16 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript></div>
         sessionStorage.setItem('clickCount', clickCount);
         if (clickElement) clickElement.textContent = `Clicks: ${clickCount}`;
     });
+
+    // Move StatCounter element into widget after it loads
+    setTimeout(() => {
+        const statCounterEl = document.querySelector('.statcounter');
+        if (statCounterEl) {
+            const visitorDiv = document.getElementById('visitor-count');
+            if (visitorDiv) {
+                visitorDiv.innerHTML = 'Visitors: ';
+                visitorDiv.appendChild(statCounterEl);
+            }
+        }
+    }, 2000); // Delay to ensure StatCounter loads
 }
