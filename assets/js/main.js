@@ -99,6 +99,7 @@ function initDropdowns() {
  * Shows session time, clicks, and visitor count in bottom-right corner
  */
 function initFloatingWidget() {
+    console.log('Initializing floating widget');
     // Check if user dismissed the widget
     if (localStorage.getItem('widgetDismissed')) return;
 
@@ -163,6 +164,7 @@ function initFloatingWidget() {
     let lastScrollY = window.scrollY;
     let currentSpeed = 0;
     const speedElement = document.getElementById('scroll-speed');
+    console.log('Speed element found:', speedElement);
 
     function updateScrollSpeed() {
         const now = performance.now();
@@ -177,7 +179,10 @@ function initFloatingWidget() {
         lastScrollTime = now;
         lastScrollY = window.scrollY;
 
-        if (speedElement) speedElement.textContent = `Scroll Speed: ${currentSpeed} km/h`;
+        if (speedElement) {
+            speedElement.textContent = `Scroll Speed: ${currentSpeed} km/h`;
+            console.log('Updated speed to:', currentSpeed);
+        }
     }
 
     // Update on scroll
