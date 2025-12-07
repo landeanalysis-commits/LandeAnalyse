@@ -115,6 +115,7 @@ function initFloatingWidget() {
         </div>
         <div id="session-time">Time: 00:00:00</div>
         <div id="click-count">Clicks: 0</div>
+        <div id="scroll-speed">Scroll Speed: 0 km/h</div>
         <div id="visitor-count">Visitors: Loading...</div>
     `;
 
@@ -155,6 +156,41 @@ function initFloatingWidget() {
         clickCount++;
         sessionStorage.setItem('clickCount', clickCount);
         if (clickElement) clickElement.textContent = `Clicks: ${clickCount}`;
+    });
+
+    // Scrolling speed tracking
+    let lastScrollTime = performance.now();
+    let lastScrollY = window.scrollY;
+    let currentSpeed = 0;
+    const speedElement = document.getElementById('scroll-speed');
+
+    function updateScrollSpeed() {
+        const now = performance.now();
+        const deltaTime = now - lastScrollTime;
+        const deltaY = Math.abs(window.scrollY - lastScrollY);
+
+        if (deltaTime > 0) {
+            const pixelsPerSec = (deltaY / deltaTime) * 1000;
+            currentSpeed = Math.round(pixelsPerSec * 3.6); // Convert to km/h (fictional)
+        }
+
+        lastScrollTime = now;
+        lastScrollY = window.scrollY;
+
+        if (speedElement) speedElement.textContent = `Scroll Speed: ${currentSpeed} km/h`;
+    }
+
+    // Update on scroll
+    window.addEventListener('scroll', updateScrollSpeed);
+
+    // Reset speed if no scroll for 1 second
+    let resetTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(resetTimer);
+        resetTimer = setTimeout(() => {
+            currentSpeed = 0;
+            if (speedElement) speedElement.textContent = `Scroll Speed: 0 km/h`;
+        }, 1000);
     });
 
     // Move StatCounter element into widget after it loads
