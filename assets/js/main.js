@@ -39,6 +39,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize dropdown functionality
     initDropdowns();
+
+    // Initialize floating widget
+    initFloatingWidget();
 });
 
 /**
@@ -88,5 +91,81 @@ function initDropdowns() {
                 dropdown.classList.remove('active');
             });
         }
+    });
+}
+
+/**
+ * Initialize floating session stats widget
+ * Shows session time, clicks, and visitor count in bottom-right corner
+ */
+function initFloatingWidget() {
+    // Check if user dismissed the widget
+    if (localStorage.getItem('widgetDismissed')) return;
+
+    // Create widget container
+    const widget = document.createElement('div');
+    widget.id = 'session-widget';
+    widget.className = 'fixed bottom-5 right-5 bg-earth-800 text-white p-3 rounded shadow opacity-90 text-sm z-50 max-w-xs font-inter';
+
+    // Set initial HTML content
+    widget.innerHTML = `
+        <div class="flex justify-between items-center mb-2">
+            <span class="font-semibold">Session Stats</span>
+            <button id="close-widget" class="text-white hover:text-earth-300 text-lg leading-none">&times;</button>
+        </div>
+        <div id="session-time">Time: 00:00:00</div>
+        <div id="click-count">Clicks: 0</div>
+        <div id="visitor-count">Visitors: <script type="text/javascript">
+var sc_project=13189291;
+var sc_invisible=0;
+var sc_security="8e602a87";
+var scJsHost = "https://";
+document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="Web Analytics Made Easy -
+Statcounter" href="https://statcounter.com/" target="_blank"><img
+class="statcounter" src="https://c.statcounter.com/13189291/0/8e602a87/0/"
+alt="Web Analytics Made Easy - Statcounter"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript></div>
+    `;
+
+    // Append to body
+    document.body.appendChild(widget);
+
+    // Close button functionality
+    document.getElementById('close-widget').addEventListener('click', () => {
+        widget.style.display = 'none';
+        localStorage.setItem('widgetDismissed', 'true');
+    });
+
+    // Session time tracking
+    let startTime = sessionStorage.getItem('startTime');
+    if (!startTime) {
+        startTime = Date.now();
+        sessionStorage.setItem('startTime', startTime);
+    }
+
+    function updateTime() {
+        const elapsed = Math.floor((Date.now() - parseInt(startTime)) / 1000);
+        const hours = Math.floor(elapsed / 3600).toString().padStart(2, '0');
+        const minutes = Math.floor((elapsed % 3600) / 60).toString().padStart(2, '0');
+        const seconds = (elapsed % 60).toString().padStart(2, '0');
+        const timeElement = document.getElementById('session-time');
+        if (timeElement) timeElement.textContent = `Time: ${hours}:${minutes}:${seconds}`;
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
+
+    // Click counter
+    let clickCount = parseInt(sessionStorage.getItem('clickCount')) || 0;
+    const clickElement = document.getElementById('click-count');
+    if (clickElement) clickElement.textContent = `Clicks: ${clickCount}`;
+
+    document.addEventListener('click', () => {
+        clickCount++;
+        sessionStorage.setItem('clickCount', clickCount);
+        if (clickElement) clickElement.textContent = `Clicks: ${clickCount}`;
     });
 }
