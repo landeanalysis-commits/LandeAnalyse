@@ -99,6 +99,7 @@ function initDropdowns() {
  * Shows session time, clicks, and visitor count in bottom-right corner
  */
 function initFloatingWidget() {
+    console.log('Beta debug: Initializing widget');
     // Check if user dismissed the widget
     if (localStorage.getItem('widgetDismissed')) return;
 
@@ -115,7 +116,7 @@ function initFloatingWidget() {
     // Set initial HTML content
     widget.innerHTML = `
         <div class="flex justify-between items-center mb-2">
-            <span class="font-semibold">Session Stats <span class="text-xs bg-earth-600 px-1 py-0.5 rounded text-white">Beta</span></span>
+            <span class="font-semibold">Session Stats <span class="text-xs bg-red-500 px-1 py-0.5 rounded text-white border">Beta</span></span>
             <button id="close-widget" class="text-white hover:text-earth-300 text-lg leading-none">&times;</button>
         </div>
         <div id="session-time">Time: 00:00:00</div>
