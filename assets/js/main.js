@@ -99,14 +99,18 @@ function initDropdowns() {
  * Shows session time, clicks, and visitor count in bottom-right corner
  */
 function initFloatingWidget() {
-    console.log('Initializing floating widget');
     // Check if user dismissed the widget
     if (localStorage.getItem('widgetDismissed')) return;
 
     // Create widget container
     const widget = document.createElement('div');
     widget.id = 'session-widget';
-    widget.className = 'fixed bottom-5 right-5 bg-earth-800 text-white p-3 rounded shadow opacity-90 text-sm z-50 max-w-xs font-inter';
+    widget.className = 'fixed bottom-5 right-5 bg-earth-800 text-white p-3 rounded shadow opacity-90 text-sm z-50 font-inter';
+    widget.style.width = '200px';
+    widget.style.minHeight = '150px';
+    widget.style.display = 'flex';
+    widget.style.flexDirection = 'column';
+    widget.style.alignItems = 'flex-start';
 
     // Set initial HTML content
     widget.innerHTML = `
@@ -162,38 +166,41 @@ function initFloatingWidget() {
     // Scrolling speed tracking
     let lastScrollTime = performance.now();
     let lastScrollY = window.scrollY;
-    let currentSpeed = 0;
+    let smoothedSpeed = 0;
     const speedElement = document.getElementById('scroll-speed');
-    console.log('Speed element found:', speedElement);
+    const alpha = 0.1; // Smoothing factor for EMA
 
     function updateScrollSpeed() {
         const now = performance.now();
         const deltaTime = now - lastScrollTime;
         const deltaY = Math.abs(window.scrollY - lastScrollY);
 
+        let currentSpeed = 0;
         if (deltaTime > 0) {
             const pixelsPerSec = (deltaY / deltaTime) * 1000;
-            currentSpeed = Math.round(pixelsPerSec * 3.6); // Convert to km/h (fictional)
+            currentSpeed = Math.min(Math.round((pixelsPerSec * 3.6) / 10), 500); // Realistic conversion, cap at 500 km/h
         }
+
+        // Apply exponential moving average for smoothing
+        smoothedSpeed = alpha * currentSpeed + (1 - alpha) * smoothedSpeed;
 
         lastScrollTime = now;
         lastScrollY = window.scrollY;
 
         if (speedElement) {
-            speedElement.textContent = `Scroll Speed: ${currentSpeed} km/h`;
-            console.log('Updated speed to:', currentSpeed);
+            speedElement.textContent = `Scroll Speed: ${Math.round(smoothedSpeed)} km/h`;
         }
     }
 
-    // Update on scroll
-    window.addEventListener('scroll', updateScrollSpeed);
+    // Update every 100ms for smooth display
+    setInterval(updateScrollSpeed, 100);
 
     // Reset speed if no scroll for 1 second
     let resetTimer;
     window.addEventListener('scroll', () => {
         clearTimeout(resetTimer);
         resetTimer = setTimeout(() => {
-            currentSpeed = 0;
+            smoothedSpeed = 0;
             if (speedElement) speedElement.textContent = `Scroll Speed: 0 km/h`;
         }, 1000);
     });
