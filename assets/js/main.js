@@ -42,6 +42,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize floating widget
     initFloatingWidget();
+
+    // Secret keyboard shortcut to reset widget (Ctrl+Shift+W)
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.shiftKey && e.key === 'W') {
+            localStorage.removeItem('widgetDismissed');
+            localStorage.removeItem('widgetCollapsed');
+            console.log('Widget: Reset flags cleared. Reload the page to see widget.');
+            alert('Widget flags cleared! Refresh the page to see the widget again.');
+        }
+    });
 });
 
 /**
