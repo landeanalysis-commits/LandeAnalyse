@@ -96,125 +96,280 @@ function initDropdowns() {
 
 /**
  * Initialize floating session stats widget
- * Shows session time, clicks, and visitor count in bottom-right corner
+ * Shows session time, clicks, scroll speed, and visitor count with glassmorphism design
+ * Features: expand/collapse, prominent beta badge, error handling, smooth animations
  */
 function initFloatingWidget() {
-    console.log('Beta debug: Initializing widget');
-    // Check if user dismissed the widget
-    if (localStorage.getItem('widgetDismissed')) return;
+    try {
+        console.log('Widget: Initializing session stats widget');
 
-    // Create widget container
-    const widget = document.createElement('div');
-    widget.id = 'session-widget';
-    widget.className = 'fixed bottom-5 right-5 bg-earth-800 text-white p-3 rounded shadow opacity-90 text-sm z-50 font-inter';
-    widget.style.width = '200px';
-    widget.style.minHeight = '150px';
-    widget.style.display = 'flex';
-    widget.style.flexDirection = 'column';
-    widget.style.alignItems = 'flex-start';
-
-    // Set initial HTML content
-    widget.innerHTML = `
-        <div class="flex justify-between items-center mb-2">
-            <span class="font-semibold">Session Stats <span class="text-xs bg-red-500 px-1 py-0.5 rounded text-white border">Beta</span></span>
-            <button id="close-widget" class="text-white hover:text-earth-300 text-lg leading-none">&times;</button>
-        </div>
-        <div id="session-time">Time: 00:00:00</div>
-        <div id="click-count">Clicks: 0</div>
-        <div id="scroll-speed">Scroll Speed: 0 km/h</div>
-        <div id="visitor-count">Visitors: Loading...</div>
-    `;
-
-    // Append to body
-    document.body.appendChild(widget);
-
-    // Close button functionality
-    document.getElementById('close-widget').addEventListener('click', () => {
-        widget.style.display = 'none';
-        localStorage.setItem('widgetDismissed', 'true');
-    });
-
-    // Session time tracking
-    let startTime = sessionStorage.getItem('startTime');
-    if (!startTime) {
-        startTime = Date.now();
-        sessionStorage.setItem('startTime', startTime);
-    }
-
-    function updateTime() {
-        const elapsed = Math.floor((Date.now() - parseInt(startTime)) / 1000);
-        const hours = Math.floor(elapsed / 3600).toString().padStart(2, '0');
-        const minutes = Math.floor((elapsed % 3600) / 60).toString().padStart(2, '0');
-        const seconds = (elapsed % 60).toString().padStart(2, '0');
-        const timeElement = document.getElementById('session-time');
-        if (timeElement) timeElement.textContent = `Time: ${hours}:${minutes}:${seconds}`;
-    }
-
-    updateTime();
-    setInterval(updateTime, 1000);
-
-    // Click counter
-    let clickCount = parseInt(sessionStorage.getItem('clickCount')) || 0;
-    const clickElement = document.getElementById('click-count');
-    if (clickElement) clickElement.textContent = `Clicks: ${clickCount}`;
-
-    document.addEventListener('click', () => {
-        clickCount++;
-        sessionStorage.setItem('clickCount', clickCount);
-        if (clickElement) clickElement.textContent = `Clicks: ${clickCount}`;
-    });
-
-    // Scrolling speed tracking
-    let lastScrollTime = performance.now();
-    let lastScrollY = window.scrollY;
-    let smoothedSpeed = 0;
-    const speedElement = document.getElementById('scroll-speed');
-    const alpha = 0.1; // Smoothing factor for EMA
-
-    function updateScrollSpeed() {
-        const now = performance.now();
-        const deltaTime = now - lastScrollTime;
-        const deltaY = Math.abs(window.scrollY - lastScrollY);
-
-        let currentSpeed = 0;
-        if (deltaTime > 0) {
-            const pixelsPerSec = (deltaY / deltaTime) * 1000;
-            currentSpeed = Math.min(Math.round((pixelsPerSec * 3.6) / 10), 500); // Realistic conversion, cap at 500 km/h
+        // Check if user dismissed the widget
+        if (localStorage.getItem('widgetDismissed')) {
+            console.log('Widget: Previously dismissed by user');
+            return;
         }
 
-        // Apply exponential moving average for smoothing
-        smoothedSpeed = alpha * currentSpeed + (1 - alpha) * smoothedSpeed;
+        // Check if widget was collapsed in previous session
+        const isCollapsed = localStorage.getItem('widgetCollapsed') === 'true';
 
-        lastScrollTime = now;
-        lastScrollY = window.scrollY;
+        // Create widget container with improved styling
+        const widget = document.createElement('div');
+        widget.id = 'session-widget';
+        widget.className = `fixed bottom-5 right-5 text-white p-4 rounded-xl text-sm z-50 font-inter ${isCollapsed ? 'collapsed' : ''}`;
+        widget.style.width = '220px';
+        widget.style.minHeight = '170px';
+        widget.style.position = 'relative';
 
-        if (speedElement) {
-            speedElement.textContent = `Scroll Speed: ${Math.round(smoothedSpeed)} km/h`;
+        // Set initial HTML content with improved structure
+        widget.innerHTML = `
+            <!-- Beta Ribbon Badge -->
+            <div class="beta-ribbon">Beta</div>
+
+            <!-- Widget Header -->
+            <div class="flex justify-between items-center mb-3">
+                <div class="flex items-center gap-2">
+                    <span class="font-bold text-base text-sage">Session Stats</span>
+                    <button id="toggle-widget" class="widget-toggle text-earth-200 hover:text-white transition text-sm" title="Toggle widget">
+                        ▼
+                    </button>
+                </div>
+                <button id="close-widget" class="widget-close text-earth-200 hover:text-white text-xl leading-none" title="Close widget">&times;</button>
+            </div>
+
+            <!-- Widget Content (collapsible) -->
+            <div class="widget-content">
+                <div class="space-y-1">
+                    <div id="session-time" class="widget-stat text-earth-100">
+                        ⏱️ Time: <span class="font-mono">00:00:00</span>
+                    </div>
+                    <div id="click-count" class="widget-stat text-earth-100">
+                        🖱️ Clicks: <span class="font-mono">0</span>
+                    </div>
+                    <div id="scroll-speed" class="widget-stat text-earth-100">
+                        🚀 Speed: <span class="font-mono">0 km/h</span>
+                    </div>
+                    <div id="visitor-count" class="widget-stat text-earth-100 widget-loading">
+                        👥 Visitors: <span class="font-mono">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Append to body
+        document.body.appendChild(widget);
+        console.log('Widget: DOM element created');
+
+        // ===============================================
+        // EXPAND/COLLAPSE FUNCTIONALITY
+        // ===============================================
+        const toggleBtn = document.getElementById('toggle-widget');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                widget.classList.toggle('collapsed');
+                const collapsed = widget.classList.contains('collapsed');
+                localStorage.setItem('widgetCollapsed', collapsed.toString());
+                console.log(`Widget: ${collapsed ? 'Collapsed' : 'Expanded'}`);
+            });
         }
-    }
 
-    // Update every 100ms for smooth display
-    setInterval(updateScrollSpeed, 100);
+        // ===============================================
+        // CLOSE BUTTON FUNCTIONALITY
+        // ===============================================
+        const closeBtn = document.getElementById('close-widget');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                widget.style.animation = 'fadeOut 0.3s ease-out forwards';
+                setTimeout(() => {
+                    widget.remove();
+                    localStorage.setItem('widgetDismissed', 'true');
+                    console.log('Widget: Dismissed by user');
+                }, 300);
+            });
+        }
 
-    // Reset speed if no scroll for 1 second
-    let resetTimer;
-    window.addEventListener('scroll', () => {
-        clearTimeout(resetTimer);
-        resetTimer = setTimeout(() => {
-            smoothedSpeed = 0;
-            if (speedElement) speedElement.textContent = `Scroll Speed: 0 km/h`;
-        }, 1000);
-    });
+        // ===============================================
+        // SESSION TIME TRACKING
+        // ===============================================
+        let startTime = sessionStorage.getItem('startTime');
+        if (!startTime) {
+            startTime = Date.now();
+            sessionStorage.setItem('startTime', startTime);
+            console.log('Widget: Session timer started');
+        }
 
-    // Move StatCounter element into widget after it loads
-    setTimeout(() => {
-        const statCounterEl = document.querySelector('.statcounter');
-        if (statCounterEl) {
-            const visitorDiv = document.getElementById('visitor-count');
-            if (visitorDiv) {
-                visitorDiv.innerHTML = 'Visitors: ';
-                visitorDiv.appendChild(statCounterEl);
+        function updateTime() {
+            try {
+                const elapsed = Math.floor((Date.now() - parseInt(startTime)) / 1000);
+                const hours = Math.floor(elapsed / 3600).toString().padStart(2, '0');
+                const minutes = Math.floor((elapsed % 3600) / 60).toString().padStart(2, '0');
+                const seconds = (elapsed % 60).toString().padStart(2, '0');
+
+                const timeElement = document.getElementById('session-time');
+                if (timeElement) {
+                    const timeSpan = timeElement.querySelector('.font-mono');
+                    if (timeSpan) timeSpan.textContent = `${hours}:${minutes}:${seconds}`;
+                }
+            } catch (error) {
+                console.error('Widget: Error updating time', error);
             }
         }
-    }, 2000); // Delay to ensure StatCounter loads
+
+        updateTime();
+        const timeInterval = setInterval(updateTime, 1000);
+
+        // ===============================================
+        // CLICK COUNTER
+        // ===============================================
+        let clickCount = parseInt(sessionStorage.getItem('clickCount')) || 0;
+        const clickElement = document.getElementById('click-count');
+
+        function updateClickCount() {
+            if (clickElement) {
+                const clickSpan = clickElement.querySelector('.font-mono');
+                if (clickSpan) clickSpan.textContent = clickCount.toString();
+            }
+        }
+
+        updateClickCount();
+
+        const clickHandler = (e) => {
+            // Don't count clicks on the widget itself
+            if (!e.target.closest('#session-widget')) {
+                clickCount++;
+                sessionStorage.setItem('clickCount', clickCount);
+                updateClickCount();
+            }
+        };
+
+        document.addEventListener('click', clickHandler);
+
+        // ===============================================
+        // SCROLL SPEED TRACKING
+        // ===============================================
+        let lastScrollTime = performance.now();
+        let lastScrollY = window.scrollY;
+        let smoothedSpeed = 0;
+        const speedElement = document.getElementById('scroll-speed');
+        const alpha = 0.15; // Smoothing factor for exponential moving average
+
+        function updateScrollSpeed() {
+            try {
+                const now = performance.now();
+                const deltaTime = now - lastScrollTime;
+                const deltaY = Math.abs(window.scrollY - lastScrollY);
+
+                let currentSpeed = 0;
+                if (deltaTime > 0 && deltaY > 0) {
+                    const pixelsPerSec = (deltaY / deltaTime) * 1000;
+                    // More realistic conversion: assume 100 pixels ≈ 1 km/h, cap at 500
+                    currentSpeed = Math.min(Math.round((pixelsPerSec * 3.6) / 10), 500);
+                }
+
+                // Apply exponential moving average for smooth transitions
+                smoothedSpeed = alpha * currentSpeed + (1 - alpha) * smoothedSpeed;
+
+                lastScrollTime = now;
+                lastScrollY = window.scrollY;
+
+                if (speedElement) {
+                    const speedSpan = speedElement.querySelector('.font-mono');
+                    if (speedSpan) speedSpan.textContent = `${Math.round(smoothedSpeed)} km/h`;
+                }
+            } catch (error) {
+                console.error('Widget: Error updating scroll speed', error);
+            }
+        }
+
+        // Update scroll speed every 100ms for smooth animation
+        const scrollInterval = setInterval(updateScrollSpeed, 100);
+
+        // Reset speed to 0 after 1 second of no scrolling
+        let resetTimer;
+        const scrollHandler = () => {
+            clearTimeout(resetTimer);
+            resetTimer = setTimeout(() => {
+                smoothedSpeed = 0;
+                if (speedElement) {
+                    const speedSpan = speedElement.querySelector('.font-mono');
+                    if (speedSpan) speedSpan.textContent = '0 km/h';
+                }
+            }, 1000);
+        };
+
+        window.addEventListener('scroll', scrollHandler);
+
+        // ===============================================
+        // STATCOUNTER INTEGRATION WITH ERROR HANDLING
+        // ===============================================
+        function integrateStatCounter() {
+            try {
+                const statCounterEl = document.querySelector('.statcounter');
+                const visitorDiv = document.getElementById('visitor-count');
+
+                if (statCounterEl && visitorDiv) {
+                    // Remove loading animation
+                    visitorDiv.classList.remove('widget-loading');
+
+                    // Style the StatCounter element
+                    statCounterEl.style.display = 'inline';
+                    statCounterEl.style.fontSize = 'inherit';
+
+                    // Update visitor count display
+                    const visitorSpan = visitorDiv.querySelector('.font-mono');
+                    if (visitorSpan) {
+                        visitorSpan.innerHTML = '';
+                        visitorSpan.appendChild(statCounterEl);
+                    }
+
+                    console.log('Widget: StatCounter integrated successfully');
+                } else if (visitorDiv) {
+                    // StatCounter failed to load
+                    visitorDiv.classList.remove('widget-loading');
+                    const visitorSpan = visitorDiv.querySelector('.font-mono');
+                    if (visitorSpan) visitorSpan.textContent = 'N/A';
+                    console.warn('Widget: StatCounter element not found');
+                }
+            } catch (error) {
+                console.error('Widget: Error integrating StatCounter', error);
+                const visitorDiv = document.getElementById('visitor-count');
+                if (visitorDiv) {
+                    visitorDiv.classList.remove('widget-loading');
+                    const visitorSpan = visitorDiv.querySelector('.font-mono');
+                    if (visitorSpan) visitorSpan.textContent = 'Error';
+                }
+            }
+        }
+
+        // Try multiple times to integrate StatCounter (it loads asynchronously)
+        const maxAttempts = 5;
+        let attempts = 0;
+        const integrationInterval = setInterval(() => {
+            attempts++;
+            const statCounterEl = document.querySelector('.statcounter');
+
+            if (statCounterEl) {
+                integrateStatCounter();
+                clearInterval(integrationInterval);
+            } else if (attempts >= maxAttempts) {
+                console.warn('Widget: StatCounter integration failed after max attempts');
+                integrateStatCounter(); // Call anyway to show error state
+                clearInterval(integrationInterval);
+            }
+        }, 800);
+
+        // ===============================================
+        // CLEANUP ON PAGE UNLOAD
+        // ===============================================
+        window.addEventListener('beforeunload', () => {
+            clearInterval(timeInterval);
+            clearInterval(scrollInterval);
+            clearInterval(integrationInterval);
+            document.removeEventListener('click', clickHandler);
+            window.removeEventListener('scroll', scrollHandler);
+        });
+
+    } catch (error) {
+        console.error('Widget: Critical initialization error', error);
+    }
 }
