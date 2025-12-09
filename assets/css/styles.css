@@ -82,6 +82,10 @@ html[lang="en"] .lang-en {
 
 /* Main widget container with glassmorphism */
 #session-widget {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 9999 !important;
     backdrop-filter: blur(12px) saturate(180%);
     background: rgba(30, 70, 32, 0.85) !important;
     border: 1px solid rgba(135, 169, 135, 0.2);
@@ -212,6 +216,7 @@ html[lang="en"] .lang-en {
 /* Mobile responsive adjustments */
 @media (max-width: 640px) {
     #session-widget {
+        position: fixed !important;
         bottom: 10px !important;
         right: 10px !important;
         width: 180px !important;
