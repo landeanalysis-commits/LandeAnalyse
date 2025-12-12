@@ -327,25 +327,33 @@ function initFloatingWidget() {
                     // Remove loading animation
                     visitorDiv.classList.remove('widget-loading');
 
-                    // Extract and format the count from StatCounter
-                    const statText = statCounterEls[0].textContent || statCounterEls[0].innerText || '';
-                    const countMatch = statText.match(/\d+/);
-                    let formattedCount = statText; // fallback to original
+                    // Extract clean text from StatCounter (text mode should provide plain numbers)
+                    const statElement = statCounterEls[0];
+                    let statText = statElement.textContent || statElement.innerText || '';
 
+                    // Strip any HTML tags and clean up whitespace
+                    statText = statText.replace(/<[^>]*>/g, '').trim();
+
+                    // Format numbers with spaces for readability
+                    const countMatch = statText.match(/\d+/);
                     if (countMatch) {
                         const count = parseInt(countMatch[0], 10);
                         if (!isNaN(count)) {
-                            formattedCount = statText.replace(countMatch[0], formatNumberWithSpaces(count));
+                            statText = statText.replace(countMatch[0], formatNumberWithSpaces(count));
                         }
                     }
 
-                    // Update visitor count display
+                    // Update visitor count display with clean, styled text
                     const visitorSpan = visitorDiv.querySelector('.font-mono');
                     if (visitorSpan) {
-                        visitorSpan.textContent = formattedCount;
+                        visitorSpan.textContent = statText;
+                        // Ensure consistent styling
+                        visitorSpan.style.color = 'inherit';
+                        visitorSpan.style.fontSize = 'inherit';
+                        visitorSpan.style.fontFamily = 'inherit';
                     }
 
-                    console.log('Widget: StatCounter integrated successfully');
+                    console.log('Widget: StatCounter text integrated successfully');
                     return true;
                 } else if (visitorDiv) {
                     // StatCounter failed to load
