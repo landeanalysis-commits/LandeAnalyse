@@ -161,7 +161,7 @@ function initFloatingWidget() {
                         Speed: <span class="font-mono">0 km/h</span>
                     </div>
                     <div id="visitor-count" class="widget-stat text-earth-100 widget-loading">
-                        Visitors: <span class="font-mono">Loading...</span>
+                        Views: <span class="font-mono">Loading...</span>
                     </div>
                 </div>
             </div>
@@ -314,6 +314,10 @@ function initFloatingWidget() {
         // ===============================================
         // STATCOUNTER INTEGRATION WITH ERROR HANDLING
         // ===============================================
+        function formatNumberWithSpaces(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        }
+
         function integrateStatCounter() {
             try {
                 const statCounterEls = document.querySelectorAll('.statcounter');
@@ -323,16 +327,22 @@ function initFloatingWidget() {
                     // Remove loading animation
                     visitorDiv.classList.remove('widget-loading');
 
-                    // Clone the StatCounter element to avoid breaking original
-                    const statClone = statCounterEls[0].cloneNode(true);
-                    statClone.style.display = 'inline';
-                    statClone.style.fontSize = 'inherit';
+                    // Extract and format the count from StatCounter
+                    const statText = statCounterEls[0].textContent || statCounterEls[0].innerText || '';
+                    const countMatch = statText.match(/\d+/);
+                    let formattedCount = statText; // fallback to original
+
+                    if (countMatch) {
+                        const count = parseInt(countMatch[0], 10);
+                        if (!isNaN(count)) {
+                            formattedCount = statText.replace(countMatch[0], formatNumberWithSpaces(count));
+                        }
+                    }
 
                     // Update visitor count display
                     const visitorSpan = visitorDiv.querySelector('.font-mono');
                     if (visitorSpan) {
-                        visitorSpan.innerHTML = '';
-                        visitorSpan.appendChild(statClone);
+                        visitorSpan.textContent = formattedCount;
                     }
 
                     console.log('Widget: StatCounter integrated successfully');
@@ -341,7 +351,7 @@ function initFloatingWidget() {
                     // StatCounter failed to load
                     visitorDiv.classList.remove('widget-loading');
                     const visitorSpan = visitorDiv.querySelector('.font-mono');
-                    if (visitorSpan) visitorSpan.textContent = 'N/A';
+                    if (visitorSpan) visitorSpan.textContent = 'Privacy Settings';
                     console.warn('Widget: StatCounter element not found');
                 }
                 return false;
@@ -371,7 +381,7 @@ function initFloatingWidget() {
                 if (visitorDiv) {
                     visitorDiv.classList.remove('widget-loading');
                     const visitorSpan = visitorDiv.querySelector('.font-mono');
-                    if (visitorSpan) visitorSpan.textContent = 'N/A';
+                    if (visitorSpan) visitorSpan.textContent = 'Privacy Settings';
                 }
                 clearInterval(integrationInterval);
             }
