@@ -122,7 +122,7 @@ html[lang="en"] .lang-en {
 .beta-ribbon {
     position: absolute;
     top: 8px;
-    right: -4px;
+    right: 24px;
     background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
     color: white;
     padding: 2px 12px 2px 8px;
@@ -213,17 +213,82 @@ html[lang="en"] .lang-en {
     animation: fadeInUp 0.5s ease-out;
 }
 
+/* Improved responsive design */
+#session-widget {
+    position: fixed !important;
+    bottom: clamp(10px, 2vh, 20px) !important;
+    right: clamp(10px, 2vw, 20px) !important;
+    width: clamp(180px, 20vw, 240px) !important;
+    min-height: auto !important;
+    z-index: 9999 !important;
+    backdrop-filter: blur(12px) saturate(180%);
+    background: rgba(30, 70, 32, 0.85) !important;
+    border: 1px solid rgba(135, 169, 135, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+#session-widget:hover {
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.25);
+    border-color: rgba(135, 169, 135, 0.3);
+}
+
+/* Better header layout with flexbox */
+.widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.widget-title-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+.widget-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+/* Improved content area */
+.widget-content {
+    padding: 0 4px;
+}
+
+.widget-content .space-y-1 > * + * {
+    margin-top: 8px;
+}
+
+/* Better collapsed state */
+#session-widget.collapsed {
+    height: auto !important;
+    min-height: 48px !important;
+    padding: 12px 16px;
+}
+
+#session-widget.collapsed .widget-content {
+    display: none;
+}
+
 /* Mobile responsive adjustments */
 @media (max-width: 640px) {
     #session-widget {
-        position: fixed !important;
+        width: calc(100vw - 20px) !important;
+        max-width: 200px !important;
         bottom: 10px !important;
         right: 10px !important;
-        width: 180px !important;
         font-size: 12px !important;
     }
 
     .beta-ribbon {
+        right: 20px;
         font-size: 9px;
         padding: 2px 10px 2px 6px;
     }

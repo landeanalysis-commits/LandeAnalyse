@@ -136,30 +136,32 @@ function initFloatingWidget() {
             <div class="beta-ribbon">Beta</div>
 
             <!-- Widget Header -->
-            <div class="flex justify-between items-center mb-3">
-                <div class="flex items-center gap-2">
+            <div class="widget-header">
+                <div class="widget-title-section">
                     <span class="font-bold text-base text-sage">Session Stats</span>
                     <button id="toggle-widget" class="widget-toggle text-earth-200 hover:text-white transition text-sm" title="Toggle widget">
                         ▼
                     </button>
                 </div>
-                <button id="close-widget" class="widget-close text-earth-200 hover:text-white text-xl leading-none" title="Close widget">&times;</button>
+                <div class="widget-controls">
+                    <button id="close-widget" class="widget-close text-earth-200 hover:text-white text-xl leading-none" title="Close widget">&times;</button>
+                </div>
             </div>
 
             <!-- Widget Content (collapsible) -->
             <div class="widget-content">
                 <div class="space-y-1">
                     <div id="session-time" class="widget-stat text-earth-100">
-                        ⏱️ Time: <span class="font-mono">00:00:00</span>
+                        Time: <span class="font-mono">00:00:00</span>
                     </div>
                     <div id="click-count" class="widget-stat text-earth-100">
-                        🖱️ Clicks: <span class="font-mono">0</span>
+                        Clicks: <span class="font-mono">0</span>
                     </div>
                     <div id="scroll-speed" class="widget-stat text-earth-100">
-                        🚀 Speed: <span class="font-mono">0 km/h</span>
+                        Speed: <span class="font-mono">0 km/h</span>
                     </div>
                     <div id="visitor-count" class="widget-stat text-earth-100 widget-loading">
-                        👥 Visitors: <span class="font-mono">Loading...</span>
+                        Visitors: <span class="font-mono">Loading...</span>
                     </div>
                 </div>
             </div>
@@ -314,25 +316,27 @@ function initFloatingWidget() {
         // ===============================================
         function integrateStatCounter() {
             try {
-                const statCounterEl = document.querySelector('.statcounter');
+                const statCounterEls = document.querySelectorAll('.statcounter');
                 const visitorDiv = document.getElementById('visitor-count');
 
-                if (statCounterEl && visitorDiv) {
+                if (statCounterEls.length > 0 && visitorDiv) {
                     // Remove loading animation
                     visitorDiv.classList.remove('widget-loading');
 
-                    // Style the StatCounter element
-                    statCounterEl.style.display = 'inline';
-                    statCounterEl.style.fontSize = 'inherit';
+                    // Clone the StatCounter element to avoid breaking original
+                    const statClone = statCounterEls[0].cloneNode(true);
+                    statClone.style.display = 'inline';
+                    statClone.style.fontSize = 'inherit';
 
                     // Update visitor count display
                     const visitorSpan = visitorDiv.querySelector('.font-mono');
                     if (visitorSpan) {
                         visitorSpan.innerHTML = '';
-                        visitorSpan.appendChild(statCounterEl);
+                        visitorSpan.appendChild(statClone);
                     }
 
                     console.log('Widget: StatCounter integrated successfully');
+                    return true;
                 } else if (visitorDiv) {
                     // StatCounter failed to load
                     visitorDiv.classList.remove('widget-loading');
@@ -340,6 +344,7 @@ function initFloatingWidget() {
                     if (visitorSpan) visitorSpan.textContent = 'N/A';
                     console.warn('Widget: StatCounter element not found');
                 }
+                return false;
             } catch (error) {
                 console.error('Widget: Error integrating StatCounter', error);
                 const visitorDiv = document.getElementById('visitor-count');
@@ -348,25 +353,29 @@ function initFloatingWidget() {
                     const visitorSpan = visitorDiv.querySelector('.font-mono');
                     if (visitorSpan) visitorSpan.textContent = 'Error';
                 }
+                return false;
             }
         }
 
-        // Try multiple times to integrate StatCounter (it loads asynchronously)
-        const maxAttempts = 5;
+        // Try multiple times to integrate StatCounter with exponential backoff
+        const maxAttempts = 10;
         let attempts = 0;
         const integrationInterval = setInterval(() => {
             attempts++;
-            const statCounterEl = document.querySelector('.statcounter');
-
-            if (statCounterEl) {
-                integrateStatCounter();
+            if (integrateStatCounter()) {
                 clearInterval(integrationInterval);
             } else if (attempts >= maxAttempts) {
                 console.warn('Widget: StatCounter integration failed after max attempts');
-                integrateStatCounter(); // Call anyway to show error state
+                // Show fallback
+                const visitorDiv = document.getElementById('visitor-count');
+                if (visitorDiv) {
+                    visitorDiv.classList.remove('widget-loading');
+                    const visitorSpan = visitorDiv.querySelector('.font-mono');
+                    if (visitorSpan) visitorSpan.textContent = 'N/A';
+                }
                 clearInterval(integrationInterval);
             }
-        }, 800);
+        }, Math.min(800 + (attempts * 200), 2000)); // Exponential backoff, max 2s
 
         // ===============================================
         // CLEANUP ON PAGE UNLOAD
